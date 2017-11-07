@@ -1,0 +1,94 @@
+<div class="login animateFade" ng-show="mainCtrl.views.login" ng-controller="loginController as loginCtrl">
+  <div class="animateFade" ng-show="loginCtrl.views.login">
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <div class="text-center">
+          <!-- <h1><i class="fa fa-globe"></i> DGBOSS</h1> -->
+          <img id="loginImage" src="./images/dgBossImagotipo.png">
+        </div>
+        <section class="login_content">
+          <form>
+            <!-- <h1>Login</h1> -->
+            <div>
+              <input type="text" class="form-control" id="dgBossUsername" ng-model="loginCtrl.loginData.username" placeholder="Usuario" required="" />
+            </div>
+            <div>
+              <input type="password" class="form-control" id="dgBossPassword" ng-model="loginCtrl.loginData.password" placeholder="Contraseña" required="" />
+            </div>
+            <div>
+              <a type="submit" id="dgBossLoginButton" class="btn btn-primary submit no-margin" ng-click="loginCtrl.logIn()">Log in</a>
+            </div>
+            <div>
+              </br>
+              <a class="no-margin" href="#" ng-click="loginCtrl.viewsController('forgotPassword')">Olvidó la contraseña?</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <!-- <p class="change_link no-margin">Nuevo a DGBOSS?
+                <a href="#" class="to_register no-margin" ng-click="loginCtrl.viewsController('createUser')"> Crear Cuenta </a>
+              </p> -->
+
+              <div class="clearfix"></div>
+              <div>
+                <p>©2016 All Rights Reserved. DgBoss Broker Oriented Service. Privacy and Terms</p>
+
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="animateFade" ng-show="loginCtrl.views.forgotPassword">
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <div class="text-center">
+          <!-- <h1><i class="fa fa-globe"></i> DGBOSS</h1> -->
+          <img id="loginImage" src="./images/dgBossImagotipo.png">
+        </div>
+        <section class="login_content">
+          <form>
+            <!-- <h1>Login</h1> -->
+             <p>Ingresa tu correo electrónico para recibir un mensaje con la nueva contraseña temporal.</p>
+             <div>
+              <input type="text" class="form-control" id="dgBossEmail" ng-model="loginCtrl.forgotData.email" placeholder="Correo electrónico" required="" />
+            </div> 
+            <!-- <div>
+              <input type="password" class="form-control" id="dgBossPassword" ng-model="loginCtrl.loginData.password" placeholder="Contraseña" required="" />
+            </div> -->
+            <div>
+              <a type="submit" id="dgBossLoginButton" class="btn btn-primary submit no-margin" ng-click="loginCtrl.forgotPassword()">Enviar</a>
+            </div>
+            <div>
+              </br>
+              <a class="no-margin" href="#" ng-click="loginCtrl.viewsController('login')">¿Ya estás registrado? Ingresa aquí</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <!-- <p class="change_link no-margin">Nuevo a DGBOSS?
+                <a href="#" class="to_register no-margin" ng-click="loginCtrl.viewsController('createUser')"> Crear Cuenta </a>
+              </p> -->
+
+              <div class="clearfix"></div>
+              <div>
+                <p>©2016 All Rights Reserved. DgBoss Broker Oriented Service. Privacy and Terms</p>
+
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

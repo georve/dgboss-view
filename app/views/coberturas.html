@@ -1,0 +1,255 @@
+<div class="right_col" role="main" ng-controller="coberturaController as coberturaCtrl">
+		<!-- ********************************************************************************************************
+		*************************************************************************************************************
+		**                                                AGREGAR COBERTURA                                            **
+		*************************************************************************************************************
+		********************************************************************************************************* -->
+		<div  class="animateFade"ng-show="coberturaCtrl.views.agregarCobertura">
+			<div class="page-title">
+			  </br>
+			</div>
+			<div class="x_panel">
+				<div class="x_title">
+					  <h2>Crear cobertura<small>Proceso para creación de una nueva cobertura.</small></h2>
+					   <!-- <ul class="nav navbar-right custom_panel_toolbox">
+						<li><a class="cobertura collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+					  </ul> -->
+				<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<form id="agregarCoberturaDatosGenerales" data-parsley-validate class="form-horizontal form-label-left">
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12  has-feedback">
+								<input type="text" class="form-control has-feedback-left" id="inputNombre" data-validate-length-range="3,20" required="required"  type="text" ng-model="coberturaCtrl.formCobertura.nombre">
+								<span class="fa fa-folder-o form-control-feedback left" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<label class="custom_form_p"> B&aacute;sica: </label>
+									<div class="{{coberturaCtrl.basicaOpcionalCheck.basica}}" style="position: relative;" ng-click=					"coberturaCtrl.basicaOpcionalSwitch('Básico')">
+										<input type="radio" class="flat" name="tipoPersona" ng-value="realValues[0]" style="position: absolute; opacity: 0; cursor: pointer;" ng-model="coberturaCtrl.formCobertura.basica">
+									</input>
+									</div>
+									<label class="custom_form_p"> Opcional: </label>
+									<div class="{{coberturaCtrl.basicaOpcionalCheck.opcional}}" style="position: relative;" ng-click="coberturaCtrl.basicaOpcionalSwitch('Opcional')" >
+										<input type="radio" class="flat" name="tipoPersona" ng-value="realValues[1]" style="position: absolute; opacity: 0; cursor: pointer;" ng-model="coberturaCtrl.formCobertura.opcional">
+									</input>
+								  </div>
+								</div>
+							</div>
+						 </div>
+						<div class="item form-group">
+							<label class="control-label has-feedback-left col-md-3 col-sm-3 col-xs-12">Ramo <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+							  <select class="form-control" id="selectRamo" ng-model="coberturaCtrl.formCobertura.ramo"
+							  ng-options="ramo as ramo for ramo in coberturaCtrl.ramos">
+								<option value="">Seleccione..</option>
+							  </select>
+							</div>
+						</div>
+						<div class="ln_solid"></div>
+						<div class="item form-group">
+							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+								<button id="send" type="button" class="btn btn-success   col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="coberturaCtrl.guardarCobertura()">Guardar</button>
+								<button type="button" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="coberturaCtrl.cancelarCobertura()">Limpiar</button>
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- ********************************************************************************************************
+		*************************************************************************************************************
+		**                                                VER COBERTURA                                            **
+		*************************************************************************************************************
+		********************************************************************************************************* -->
+		<div class="activarModalCobertura" ng-click="coberturaCtrl.consultarCobertura()"></div>
+		<div class="modal fade " id="consultarCobertura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+						  <h4 class="modal-title" id="myModalLabel">Ver datos de la cobertura</h4>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+							  <table class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+								<thead>
+								  <tr class="headings">
+									<th class="column-title text-center"colspan="2">Datos generales</th>
+								  </tr>
+								</thead>
+
+								<tbody>
+									<tr class="odd pointer">
+										<td class="textRight"><b>Ramo</b></td>
+										<td class=" ">{{coberturaCtrl.coberturaModal.ramo}}</td>
+									</tr>
+									<tr class="even pointer">
+										<td class="textRight" style="width: 50%"><b>Sub ramo</b></td>
+										<td class=" ">{{coberturaCtrl.coberturaModal.subRamo}}</td>
+									</tr>
+									<tr class="even pointer">
+										<td class="textRight" style="width: 50%"><b>Nombre de la cobertura</b></td>
+										<td class=" ">{{coberturaCtrl.coberturaModal.nombre}}</td>
+									</tr>
+									<tr class="odd pointer">
+										<td class="textRight"><b>Tipo</b></td>
+										<td class=" ">{{coberturaCtrl.coberturaModal.tipo}}</td>
+									</tr>
+
+								</tbody>
+							  </table>
+							</div>
+						</div>
+						<div class="modal-footer textCenter">
+						  <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="coberturaCtrl.eliminarModal('cancelar')">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- ********************************************************************************************************
+		*************************************************************************************************************
+		**                                               EDITAR COBERTURA                                            **
+		*************************************************************************************************************
+		********************************************************************************************************* -->
+
+		<div class="activarEditarCobertura" ng-click="coberturaCtrl.editarCobertura()"></div>
+		<div class="animateFade" ng-show="coberturaCtrl.views.editarCobertura">
+			<div class="page-title">
+			  </br>
+			</div>
+			<div class="x_panel">
+				<div class="x_title">
+					  <h2>Editar cobertura<small>Proceso para editar una cobertura.</small></h2>
+					   <!-- <ul class="nav navbar-right custom_panel_toolbox">
+							<li><a class="cobertura collapse-link"><i class="fa fa-chevron-up"></i></a>
+							</li>
+					  </ul> -->
+				<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<form id="editarCoberturaDatosGenerales" data-parsley-validate class="form-horizontal form-label-left">
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12  has-feedback">
+								<input type="text" class="form-control has-feedback-left" id="editarInputNombre" data-validate-length-range="3,20" required="required"  type="text" ng-model="coberturaCtrl.editarCoberturas.nombre">
+								<span class="fa fa-folder-o form-control-feedback left" aria-hidden="true"></span>
+							</div>
+						</div>
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12  has-feedback">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<label class="custom_form_p"> B&aacute;sico: </label>
+									<div class="{{coberturaCtrl.basicaOpcionalCheck.basica}}" style="position: relative;" ng-click=	"coberturaCtrl.basicaOpcionalSwitch('Básico')">
+										<input type="radio" class="flat" name="tipoPersona" ng-value="realValues[0]" style="position: absolute; opacity: 0; cursor: pointer;" ng-model="coberturaCtrl.editarCoberturas.basica">
+									</input>
+									</div>
+									<label class="custom_form_p"> Opcional: </label>
+									<div class="{{coberturaCtrl.basicaOpcionalCheck.opcional}}" style="position: relative;" ng-click="coberturaCtrl.basicaOpcionalSwitch('Opcional')" >
+										<input type="radio" class="flat" name="tipoPersona" ng-value="realValues[1]" style="position: absolute; opacity: 0; cursor: pointer;" ng-model="coberturaCtrl.editarCoberturas.opcional">
+									</input>
+								  </div>
+								</div>
+							</div>
+						 </div>
+						<div class="item form-group">
+							<label class="control-label has-feedback-left col-md-3 col-sm-3 col-xs-12">Ramo <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+								<select class="form-control" id="editarSelectRamo" ng-model="coberturaCtrl.editarCoberturas.ramo"
+									ng-options="ramo as ramo for ramo in coberturaCtrl.ramos">
+									<option value="">Seleccione..</option>
+								</select>
+							</div>
+						</div>
+						<div class="item form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estatus <span class="required">*</span>
+							</label>
+							<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+							  <select class="form-control" ng-options="estatu as estatu for estatu in coberturaCtrl.estatus" ng-model="coberturaCtrl.editarCoberturas.estatus">
+								<option value="">Seleccione..</option>
+							  </select>
+							</div>
+						</div>
+						<div class="ln_solid"></div>
+						<div class="item form-group">
+							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+								<button type="button" class="btn btn-success   col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="coberturaCtrl.guardarCobertura()">Guardar</button>
+								<button type="button" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="coberturaCtrl.cancelarCobertura()">Cancelar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- ********************************************************************************************************
+		*************************************************************************************************************
+		**                                                LISTAR COBERTURA                                         **
+		*************************************************************************************************************
+		********************************************************************************************************* -->
+
+		<div class="animateFade" ng-show="coberturaCtrl.views.listarCobertura">
+			<div class="x_panel">
+			  <div class="x_title">
+				<h2>Consultar coberturas<small>Lista de coberturas</small></h2>
+				   <!-- <ul class="nav navbar-right custom_panel_toolbox">
+						<li><a class="cobertura collapse-link"><i class="fa fa-chevron-up"></i></a>
+						</li>
+				  </ul> -->
+				<div class="clearfix"></div>
+			  </div>
+			  <div class="x_content">
+				<table id="tablaConsultarCobertura" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+				  <thead>
+					<tr>
+						<th>Ramo</th>
+						<th>Sub ramo</th>
+						<th>Cobertura</th>
+						<th>Tipo</th>
+						<th>Acción</th>
+					</tr>
+				  </thead>
+				</table>
+			  </div>
+			</div>
+	  </div>
+
+		<!-- ********************************************************************************************************
+		*************************************************************************************************************
+		**                                                ELIMINAR COBERTURA                                                 **
+		*************************************************************************************************************
+		********************************************************************************************************* -->
+		<div class="modal fade eliminarCoberturaModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+				<div class="modal-content modal-content-question">
+
+					<div class="modal-header modal-header-question">
+						<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+					</div>
+
+					<div class="modal-body">
+						<h5 class="text-center">¿Está seguro que desea eliminar la cobertura {{coberturaCtrl.formCobertura.nombre}}?</h5>
+						</br>
+						<div class="row text-center">
+							<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="coberturaCtrl.eliminarCobertura('aceptar')">Aceptar</button>
+							<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="coberturaCtrl.eliminarCobertura('cancelar')">Cancelar</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+</div>

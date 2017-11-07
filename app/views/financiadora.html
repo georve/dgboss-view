@@ -1,0 +1,799 @@
+<div class="right_col" role="main" ng-controller="financiadoraController as financiadoraCtrl">
+	<div class="activarFinanciadora" ng-click="financiadoraCtrl.verFinanciadora()"></div>
+	<div class="activarEditarFinanciadora" ng-click="financiadoraCtrl.editarFinanciadoraFn()"></div>
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                                AGREGAR FINACIADORA                                      **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="animateFade" ng-show="financiadoraCtrl.views.agregarFinanciadora">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Agregar financiadora <small>Proceso de registro de una nueva finaciadora</small></h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="accordion" id="financiadora" role="tablist" aria-multiselectable="true">
+					<div class="panel">
+						<a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#financiadora" href="#financiadoraDatosGenerales"
+						 aria-expanded="true" aria-controls="financiadora">
+							<h4 class="panel-title">Datos generales <span class="pull-right"><i class='glyphicon glyphicon-menu-down'></i></span></h4>
+						</a>
+						<div id="financiadoraDatosGenerales" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+							<div class="panel-body">
+								<form id="financiadoraDatos" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre de la financiadora <span class="required">*</span>
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.nombre" id="agregarFinanciadoraNombre" class="form-control has-feedback-left"
+											 type="text" placeholder="Nombre de la financiadora" data-validate-length-range="3" maxlength="50" required="required">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<div class="item form-group" required="required">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">RIF <span class="required">*</span></label>
+										<div class="col-md-2 col-sm-2 col-xs-2 no-padding-right">
+											<select ng-model="financiadoraCtrl.nuevaFinanciadora.tipoRif" id="agregarFinanciadoraTipoRIF" class="form-control" ng-options="tipoRif as tipoRif for tipoRif in financiadoraCtrl.tiposRif"
+											 ng-change="financiadoraCtrl.identificacionComboChange()">
+                                                <option value="">Seleccione..</option>
+                                            </select>
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-10">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.rif" id="agregarFinanciadoraRIF" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="6" maxlength="10" type="text" required="required" placeholder="Número" ui-mask="{{financiadoraCtrl.mask}}"
+											 ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#financiadora" href="#financiadoraDireccion"
+						 aria-expanded="false" aria-controls="financiadora">
+							<h4 class="panel-title">Dirección <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="financiadoraDireccion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingtwo" aria-expanded="false"
+						 style="height: 0px;">
+							<div class="panel-body">
+								<form id="formFinanciadorasDireccion" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección Fiscal <span class="required">*</span></label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.direccionFiscal" id="agregarFinanciadoraDireccionFiscal" type="text"
+											 class="form-control has-feedback-left" data-validate-length-range="3" maxlength="200" required="required" placeholder="Dirección Fiscal">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+								<form class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono fiscal <span class="required"></span></label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.telefonoFiscal" id="agregarFinanciadoraTelefonoFiscal" type="text" class="form-control has-feedback-left"
+											placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                            Dirección sucursal <!--<span class="required">*</span>-->
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.direccionSucursal" id="agregarFinanciadoraDireccionSucursal" type="text"
+											 class="form-control has-feedback-left" data-validate-length-range="3" placeholder="Dirección sucursal">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                            Teléfono sucursal <!--<span class="required">*</span>-->
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.nuevaFinanciadora.telefonoSucursal" id="agregarFinanciadoraTelefonoSucursal" type="text"
+											 class="form-control has-feedback-left" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder
+											 ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#financiadora" href="#financiadoraContacto"
+						 aria-expanded="false" aria-controls="financiadora">
+							<h4 class="panel-title">Contacto <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="financiadoraContacto" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false"
+						 style="height: 0px;">
+							<div class="panel-body">
+								<form id="financiadorasContacto" class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre completo
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.contacto.nombreContacto" type="text" id="agregarContactoNombreCompletoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left"
+											 placeholder="Nombre completo" maxlength="100" data-validate-length-range="3" required="required" type="text">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cargo
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.contacto.cargo" type="text" id="agregarContactoCargoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left"
+											 placeholder="Cargo" maxlength="100" data-validate-length-range="3" required="required" type="text">
+											<span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.contacto.numeroTelefono" type="text" id="agregarContactoTelefonoFinanciadora" required="required"
+											 class="form-control has-feedback-left" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+											</br>
+											<button type="button" class="btn btn-success col-sm-2 col-sm-offset-5" ng-click="financiadoraCtrl.agregarContacto()">Agregar</button>
+										</div>
+									</div>
+								</form>
+								<div class="clearfix"></div>
+								</br>
+								<div class="item form-group" ng-show="financiadoraCtrl.nuevaFinanciadora.contactos.length > 0">
+									<div class="col-md-12 col-sm-12 col-xs-12  ">
+										<div class="x_panel" id="financiadoraSecond">
+											<div class="x_title">
+												<h2>Lista de contactos</h2>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
+												<div class="table-responsive" style="height: 250px; overflow-y: auto;">
+													<table class="table table-striped jambo_table bulk_action no-margin-bottom">
+														<thead>
+															<tr role="row">
+																<th style="width: 25%; text-align: center;">Nombre</th>
+																<th style="width: 25%; text-align: center;">Cargo</th>
+																<th style="width: 25%; text-align: center;">Teléfono</th>
+																<th style="width: 25%; text-align: center;">Acción</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr class="animateFade" ng-repeat="contacto in financiadoraCtrl.nuevaFinanciadora.contactos">
+																<td style="width: 25%; text-align: center;">{{contacto.nombreContacto}}</td>
+																<td style="width: 25%; text-align: center;">{{contacto.cargo}}</td>
+																<td style="width: 25%; text-align: center;">{{contacto.numeroTelefono}}</td>
+																<td style="width: 25%; text-align: center;">
+																	<a style="margin-right: 10px" ng-click="financiadoraCtrl.editarContacto(contacto)">
+                                                                    <i class="fa fa-pencil cursor-pointer"></i>
+                                                                    </a>
+																	<a style="margin-right: 10px" ng-click="financiadoraCtrl.eliminarContacto(contacto)">
+                                                                    <i class="fa fa-trash-o cursor-pointer"></i>
+                                                                    </a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--********************************************BANCO begin of accordion *****************************************************-->
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="headingFive" data-toggle="collapse" data-parent="#financiadora" href="#financiadoraBanco"
+						 aria-expanded="false" aria-controls="financiadora">
+							<h4 class="panel-title">Cuentas bancarias<span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="financiadoraBanco" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" aria-expanded="false"
+						 style="height: 0px;">
+							<div class="panel-body">
+								<form id="financiadoraBancos" class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Banco
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="nombreBancoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Bancos"
+											 data-validate-length-range="3" required="required" ng-model="financiadoraCtrl.banco.nombre">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de cuenta <span class="required"></span>
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+											<select class="form-control" ng-model="financiadoraCtrl.banco.tipo" required="required">
+                                                <option value="">Seleccione..</option>
+                                                <option >Ahorro</option>
+                                                <option >Corriente</option>
+                                            </select>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Número de cuenta
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="tel" id="numeroBanco" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Número de cuenta"
+											 data-validate-length-range="18,20" required="required" ng-model="financiadoraCtrl.banco.numero" ui-mask="9999999999999999999?9"
+											 ui-mask-placeholder ui-mask-placeholder-char="space">
+											<span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+											</br>
+											<button type="button" class="btn btn-success col-sm-2 col-sm-offset-5" ng-click="financiadoraCtrl.agregarBanco()">Agregar</button>
+										</div>
+									</div>
+								</form>
+								<div class="clearfix"></div>
+								</br>
+								<div class="item form-group" ng-show="financiadoraCtrl.nuevaFinanciadora.bancos.length > 0">
+									<div class="col-md-12 col-sm-12 col-xs-12  ">
+										<!--Inicio de tabla-->
+										<div class="x_panel" id="financiadoraSecond">
+											<div class="x_title">
+												<h2>Lista de cuentas bancarias</h2>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
+												<div class="table-responsive" style="height: 250px; overflow-y: auto;">
+													<table class="table table-striped jambo_table bulk_action">
+														<thead>
+															<tr role="row">
+																<th style="width: 50%; text-align: center;">Banco</th>
+																<th style="width: 15%; text-align: center;">Tipo de cuenta</th>
+																<th style="width: 20%; text-align: center;">Número de cuenta</th>
+																<th style="width: 15%; text-align: center;" aria-label="">Acción</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat=" item  in financiadoraCtrl.nuevaFinanciadora.bancos">
+																<td style="text-align: center;">{{item.nombre}}</td>
+																<td style="text-align: center;">{{item.tipo}}</td>
+																<td style="text-align: center;">{{item.numero}}</td>
+																<td style="text-align: center;"><a style="margin-right: 10px" ng-click="financiadoraCtrl.editarBanco(item)"><i class="fa fa-pencil"></i></a>
+																	<a style="margin-right: 10px" ng-click="financiadoraCtrl.eliminarbanco(item)"><i class="fa fa-trash-o"></i></a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!--fin de tabla-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--********************************************BANCO end of accordion ******************************************************-->
+				</div>
+				<!-- end of accordion -->
+				<div class="ln_solid"></div>
+				<div class="item form-group">
+					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+						<button id="sendAgregarFinanciadora" type="submit" class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3"
+						 ng-click="financiadoraCtrl.agregarFinanciadora()">Guardar</button>
+						<button type="submit" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="financiadoraCtrl.cancelar('agregar')">Limpiar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+        *********************************************************************************************************
+        **                                               EDITAR FINACIADORA
+        *********************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="animateFade" ng-show="financiadoraCtrl.views.editarFinanciadora">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Editar financiadora <small>Proceso de edición de una financiadora</small></h2>
+				<!-- <ul class="nav navbar-right custom_panel_toolbox">
+                    <li><a class="financiadora collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    </ul> -->
+				<div class="clearfix"></div>
+			</div>
+			<!-- start accordion -->
+			<div class="x_content">
+				<div class="accordion" id="editarFinanciadora" role="tablist" aria-multiselectable="true">
+					<div class="panel">
+						<a class="panel-heading collapse" role="tab" id="headingOne" data-toggle="collapse" data-parent="#editarFinanciadora" href="#editarFinanciadoraDatosGenerales"
+						 aria-expanded="true" aria-controls="editarFinanciadora">
+							<h4 class="panel-title">Datos generales <span class="pull-right"><i class='glyphicon glyphicon-menu-down'></i></span></h4>
+						</a>
+						<div id="editarFinanciadoraDatosGenerales" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+						 aria-expanded="true" style="height: 100%;">
+							<div class="panel-body">
+								<form id="editarFinanciadoraDatos" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre de la financiadora <span class="required">*</span>
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" class="form-control has-feedback-left" id="editarFinanciadoraNombreCompleto" placeholder="Nombre de la financiadora"
+											 data-validate-length-range="3" required="required" type="text" ng-model="financiadoraCtrl.editarFinanciadora.nombre">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">RIF <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-readonly="true" type="text" class="form-control has-feedback-left" id="editarFinanciadoraTipoRIF" placeholder="RIF" data-validate-length-range="3"
+											 required="required"  ng-model="financiadoraCtrl.editarFinanciadora.rif">
+											<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estatus <span class="required">*</span></label>
+										<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+											<select class="form-control" ng-model="financiadoraCtrl.editarFinanciadora.estatus">
+                                                <option value="">Seleccione..</option>
+                                                <option >Activo</option>
+                                                <option >Inactivo</option>
+                                            </select>
+										</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#editarFinanciadora" href="#editarFinanciadoraDireccion"
+						 aria-expanded="false" aria-controls="editarFinanciadora">
+							<h4 class="panel-title">Dirección <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="editarFinanciadoraDireccion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingtwo" aria-expanded="false"
+						 style="height: 0px;">
+							<div class="panel-body">
+								<form id="formEditarFinanciadorasDireccion" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección fiscal <span class="required">*</span></label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.editarFinanciadora.direccionFiscal" id="editarFinanciadoraDireccionFiscal" type="text"
+											 class="form-control has-feedback-left" data-validate-length-range="3" maxlength="200" required="required" placeholder="Dirección fiscal">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+								<form class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono fiscal <span class="required"></span></label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.editarFinanciadora.telefonoFiscal" id="editarFinanciadoraTelefonoFiscal" type="text" class="form-control has-feedback-left"
+											 data-validate-length-range="7" maxlength="15" required="required" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999"
+											 ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                            Dirección sucursal <!--<span class="required">*</span>-->
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.editarFinanciadora.direccionSucursal" id="editarFinanciadoraDireccionSucursal" type="text"
+											 class="form-control has-feedback-left" data-validate-length-range="3" maxlength="200" placeholder="Dirección sucursal">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                            Teléfono sucursal <!--<span class="required">*</span>-->
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="financiadoraCtrl.editarFinanciadora.telefonoSucursal" id="editarFinanciadoraTelefonoSucursal" type="text"
+											 class="form-control has-feedback-left" data-validate-length-range="7" maxlength="15" placeholder="(0212) 123-45-67"
+											 ui-mask="(9999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="headingfour" data-toggle="collapse" data-parent="#editarFinanciadora" href="#editarFinanciadoraContacto"
+						 aria-expanded="false" aria-controls="editarFinanciadora">
+							<h4 class="panel-title">Contacto <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="editarFinanciadoraContacto" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false"
+						 style="height: 0px;">
+							<div class="panel-body">
+								<form id="editarFinanciadorasContacto" class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre completo
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="editarNombreContactoFinaciadora" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Nombre completo"
+											 data-validate-length-range="3" required="required" type="text" ng-model="financiadoraCtrl.contacto.nombreContacto">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cargo
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="editarCargoContactoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Cargo"
+											 data-validate-length-range="3" required="required" type="text" ng-model="financiadoraCtrl.contacto.cargo">
+											<span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono <span class="required"></span>
+                                        </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="editarTelefonoContactoFinaciadora" required="required" class="form-control has-feedback-left" placeholder="(0212) 123-45-67"
+											 ng-model="financiadoraCtrl.contacto.numeroTelefono" ui-mask="(9999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+											</br>
+											<button ng-click="financiadoraCtrl.agregarContacto()" type="button" class="btn btn-success col-sm-2 col-sm-offset-5">Agregar</button>
+										</div>
+									</div>
+								</form>
+								<div class="clearfix"></div>
+								</br>
+								<div class="item form-group">
+									<div class="col-md-12 col-sm-12 col-xs-12  ">
+										<!--Inicio de tabla-->
+										<div class="x_panel" id="financiadoraSecond">
+											<div class="x_title">
+												<h2>Lista de contactos</h2>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
+												<div class="table-responsive" style="height: 250px; overflow-y: auto;">
+													<table class="table table-striped jambo_table bulk_action">
+														<thead>
+															<tr role="row">
+																<th style="width: 25%; text-align: center;">Nombre</th>
+																<th style="width: 25%; text-align: center;">Cargo</th>
+																<th style="width: 25%;text-align: center;">Teléfono</th>
+																<th style="width: 25%; text-align: center;" aria-label="">Acción</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat="contacto in financiadoraCtrl.editarFinanciadora.contactos" row={{contacto.id}}>
+																<td style="width: 25%; text-align: center;">{{contacto.nombreContacto}}</td>
+																<td style="width: 25%; text-align: center;">{{contacto.cargo}}</td>
+																<td style="width: 25%; text-align: center;">{{contacto.numeroTelefono}}</td>
+																<td style="width: 25%; text-align: center;"><a style="margin-right: 10px" ng-click="financiadoraCtrl.editarContacto(contacto)"><i class="fa fa-pencil"></i></a>																	<a style="margin-right: 10px" ng-click="financiadoraCtrl.eliminarContacto(contacto)"><i class="fa fa-trash-o"></i></a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!--fin de tabla-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="cuentasBancariasTwo" data-toggle="collapse" data-parent="#editarFinanciadora"
+						 href="#editarFinanciadoraCuentasBancarias" aria-expanded="false" aria-controls="editarFinanciadora">
+							<h4 class="panel-title">Cuentas bancarias <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="editarFinanciadoraCuentasBancarias" class="panel-collapse collapse" role="tabpanel" aria-labelledby="cuentasBancariasTwo"
+						 aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+								<form id="editarFinanciadoraBancos" class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Banco
+									</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="editarNomBancoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Bancos" data-validate-length-range="3"
+											 required="required" type="text" ng-model="financiadoraCtrl.banco.nombre">
+											<span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de cuenta <span class="required"></span>
+								</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" type="text">
+											<select class="form-control" ng-model="financiadoraCtrl.banco.tipo" required="required">
+									<option value="">Seleccione..</option>
+									<option >Ahorro</option>
+									<option >Corriente</option>
+								  </select>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Número de cuenta
+									</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" required="required" id="editarNumeroBancoFinanciadora" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Número de cuenta"
+											 data-validate-length-range="20" ng-model="financiadoraCtrl.banco.numero" ui-mask="9999999999999999999?9" ui-mask-placeholder
+											 ui-mask-placeholder-char="space">
+											<span class="fa fa-briefcase form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+											</br>
+											<button type="button" class="btn btn-success col-sm-2 col-sm-offset-5" ng-click="financiadoraCtrl.agregarBanco()">Agregar</button>
+										</div>
+									</div>
+								</form>
+								<div class="clearfix"></div>
+
+								</br>
+								<div class="item form-group" ng-show="financiadoraCtrl.editarFinanciadora.bancos.length > 0">
+									<div class="col-md-12 col-sm-12 col-xs-12  ">
+										<div class="x_panel" id="financiadoraSecond">
+											<div class="x_title">
+												<h2>Lista de cuentas bancarias</h2>
+												<div class="clearfix"></div>
+											</div>
+											<div class="x_content">
+												<div class="table-responsive" style="height: 250px; overflow-y: auto;">
+													<table class="table table-striped jambo_table bulk_action">
+														<thead>
+															<tr role="row">
+																<th style="width: 50%; text-align: center;">Banco</th>
+																<th style="width: 15%; text-align: center;">Tipo de cuenta</th>
+																<th style="width: 20%; text-align: center;">Número de cuenta</th>
+																<th style="width: 15%; text-align: center;" aria-label="">Acción</th>
+															</tr>
+														</thead>
+
+														<tbody>
+															<tr ng-repeat=" item in financiadoraCtrl.editarFinanciadora.bancos">
+																<td style="text-align: center;">{{item.nombre}}</td>
+																<td style="text-align: center;">{{item.tipo}}</td>
+																<td style="text-align: center;">{{item.numero}}</td>
+																<td style="text-align: center;"><a style="margin-right: 10px" ng-click="financiadoraCtrl.editarBanco(item)"><i class="fa fa-pencil"></i></a>																	<a style="margin-right: 10px" ng-click="financiadoraCtrl.eliminarbanco(item)"><i class="fa fa-trash-o"></i></a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of accordion -->
+				<div class="ln_solid"></div>
+				<div class="item form-group">
+					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+						<button id="sendEditarFinanciadora" type="submit" class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3"
+						 ng-click="financiadoraCtrl.guardarFinanciadora()">Guardar</button>
+						<button type="submit" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="financiadoraCtrl.cancelar('editar')">Cancelar</button>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                                VER FINACIADORA                                            **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="modal fade " id="verFinanciadora" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Datos de la financiadora</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Datos generales</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight" style="width: 50%"><b>Nombre de la finaciadora</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.nombre}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>RIF</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.rif}}</td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Dirección</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección fiscal</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.direccionFiscal}} </td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono fiscal</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.telefonoFiscal?financiadoraCtrl.financiadoraModal.telefonoFiscal:'N/A'}} </td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección sucursal</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.direccionSucursal?financiadoraCtrl.financiadoraModal.direccionSucursal:'N/A'}} </td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono sucursal</b></td>
+									<td class=" ">{{financiadoraCtrl.financiadoraModal.telefonoSucursal?financiadoraCtrl.financiadoraModal.telefonoSucursal:'N/A'}} </td>
+								</tr>
+							</tbody>
+						</table>
+						<table id="tablaModalContactos" class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="3">Contactos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="financiadoraCtrl.financiadoraModal.contactos.length == 0">
+									<td class="text-center">Esta financiadora no posee contactos registrados.</td>
+								</tr>
+								<tr class="even pointer" ng-repeat="contacto in financiadoraCtrl.financiadoraModal.contactos">
+									<td style="width: 25%; text-align: center;">{{contacto.nombreContacto}}</td>
+									<td style="width: 25%; text-align: center;">{{contacto.cargo}}</td>
+									<td style="width: 25%; text-align: center;">{{contacto.numeroTelefono}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<table  class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="3">Cuentas bancarias</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="financiadoraCtrl.financiadoraModal.bancos.length == 0">
+									<td class="text-center">Esta financiadora no posee cuentas registradas.</td>
+								</tr>
+								<tr class="even pointer" ng-repeat="banco in financiadoraCtrl.financiadoraModal.bancos">
+									<td style="width: 25%; text-align: center;">{{banco.nombre}}</td>
+									<td style="width: 25%; text-align: center;">{{banco.tipo}}</td>
+									<td style="width: 25%; text-align: center;">{{banco.numero}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer textCenter">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                                ELIMINAR FINANCIADORA                                    **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="modal fade eliminarFinanciModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+			<div class="modal-content modal-content-question">
+				<div class="modal-header modal-header-question">
+					<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+				</div>
+				<div class="modal-body">
+					<h5 class="text-center">¿Está seguro que desea eliminar la financiadora {{financiadoraCtrl.datos.nombre}}?</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModal('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModal('cancelar')">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                        ELIMINAR CONTACTO FINANCIADORA                                   **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="modal fade eliminarFinanciadoraContactoModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+			<div class="modal-content modal-content-question">
+				<div class="modal-header modal-header-question">
+					<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+				</div>
+				<div class="modal-body">
+					<h5 class="text-center">¿Está seguro que desea eliminar el contacto <b>{{financiadoraCtrl.datos.nombre}}</b>?</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModal2('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModal2('cancelar')">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                        ELIMINAR CUENTA BANCO FINANCIADORA                                   **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="modal fade eliminarFinanciadoraModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+			<div class="modal-content modal-content-question">
+
+				<div class="modal-header modal-header-question">
+					<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+				</div>
+
+				<div class="modal-body">
+					<h5 class="text-center">{{financiadoraCtrl.mensaje}}</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModalBanco('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="financiadoraCtrl.eliminarModalBanco('cancelar')">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- ********************************************************************************************************
+        *************************************************************************************************************
+        **                                                LISTAR FINACIADORA                                            **
+        *************************************************************************************************************
+        ********************************************************************************************************* -->
+	<div class="animateFade" ng-show="financiadoraCtrl.views.listarFinanciadoras">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Consultar Financiadoras<small>Lista de financiadoras</small></h2>
+				<!-- <ul class="nav navbar-right custom_panel_toolbox">
+                    <li><a class="financiadora collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    </ul> -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<table id="tablaConsultarFinanciadoras" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>RIF</th>
+							<th>Dirección fiscal</th>
+							<th>Estatus</th>
+							<th>Acción</th>
+						</tr>
+					</thead>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<div class="form-group">
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{label}} <span ng-if="isRequired()" class="required">*</span></label>
+  {{$parent.blur}}
+  <div class="col-md-6 col-sm-6 col-xs-8" ng-class="" ng-if="isInput()">
+    <input type="text" class="form-control has-feedback-left col-md-7 col-sm-7 col-xs-12" ng-model="$parent.model" ng-blur="blur2()" placeholder="" data-validate-length-range="3" required="required" type="text">
+    <span class="fa {{icon}} form-control-feedback left" aria-hidden="true"></span>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text" ng-class="" ng-if="isSelect()">
+    <select class="form-control" ng-model="$parent.model" ng-options="options as options for options in realValues" ng-blur="blur2()">
+      <option value="">Seleccione..</option>
+    </select>
+  </div>
+
+  <div class="" ng-if="isMixed()">
+    <div class="col-md-2 col-sm-2 col-xs-4 no-padding-right">
+      <select class="form-control" ng-model="$parent.model" ng-options="options as options for options in realValues">
+        <option value="">Seleccione..</option>
+      </select>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-8">
+      <input type="text" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="$parent.model2" ng-blur="blur2()" placeholder="" data-validate-length-range="3" required="required" type="text">
+      <span class="fa {{icon}} form-control-feedback left" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12" ng-if="isRadio()">
+    <label class="custom_form_p"> {{realValues[0]}}: </label>
+    <div class="{{class}}" style="position: relative;">
+      <input type="radio" class="flat" name="tipoPersona" ng-model="$parent.model" ng-blur="blur2()" ng-value="realValues[0]" ng-click="localFn('one')" style="position: absolute; opacity: 0; cursor: pointer;">
+      </input>
+    </div>
+    <label class="custom_form_p"> {{realValues[1]}}: </label>
+    <div class="{{class2}}" style="position: relative;">
+      <input type="radio" class="flat" name="tipoPersona" ng-model="$parent.model" ng-value="realValues[1]" ng-click="localFn('two')" style="position: absolute; opacity: 0; cursor: pointer;" >
+      </input>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12" ng-class="" ng-if="isDate()">
+    <input type="text" class="form-control has-feedback-left" id="{{id}}" ng-model="$parent.model" placeholder="" aria-describedby="inputSuccess2Status4">
+    <span class="fa {{icon}} form-control-feedback left" aria-hidden="true"></span>
+    <span class="sr-only">(success)</span>
+  </div>
+</div>

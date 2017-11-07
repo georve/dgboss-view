@@ -1,0 +1,1344 @@
+<div class="right_col" ng-controller="aseguradoController as aseguradoCtrl">
+
+	<!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                VER ASEGURADO                                            **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+	<div class="activarModalAsegurado" ng-click="aseguradoCtrl.ver()"></div>
+	<div class="modal fade verAseguradoModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+				<div class="modal-header paddingLeft30">
+					<h4 class="modal-title" id="myModalLabel">Datos del asegurado</h4>
+				</div>
+				<div class="modal-body" ng-show="aseguradoCtrl.naturalJuridicoRadio.natural">
+					<div class="table-responsive">
+						<table class="table table-striped jambo_table bulk_action">
+							<thead>
+								<th class="column-title" style="text-align: center;" colspan="2">Datos generales</th>
+							</thead>
+
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight" style="width: 50%;"><b>Tipo</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.tipo?aseguradoCtrl.aseguradoModal.tipo:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Nombre completo</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.nombre?aseguradoCtrl.aseguradoModal.nombre:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Cédula</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.identificacion?aseguradoCtrl.aseguradoModal.identificacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Fecha de nacimiento</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.fechaNacimiento?aseguradoCtrl.aseguradoModal.fechaNacimiento:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Sexo</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.sexo?aseguradoCtrl.aseguradoModal.sexo:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Estado civil</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.estadoCivil?aseguradoCtrl.aseguradoModal.sexo:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono celular</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.telefono?aseguradoCtrl.aseguradoModal.telefono:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Correo electrónico</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.correo?aseguradoCtrl.aseguradoModal.correo:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Localidad</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.localidad?aseguradoCtrl.aseguradoModal.localidad:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Direccion</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección de habitación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.direccionHabitacion?aseguradoCtrl.aseguradoModal.direccionHabitacion:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono de habitación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.telefonoHabitacion?aseguradoCtrl.aseguradoModal.telefonoHabitacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección de oficina</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.direccionOficina?aseguradoCtrl.aseguradoModal.direccionOficina:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono de oficina</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.telefonoOficina?aseguradoCtrl.aseguradoModal.telefonoOficina:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Datos económicos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Profesión</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.profesion?aseguradoCtrl.aseguradoModal.profesion:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Ocupación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.ocupacion?aseguradoCtrl.aseguradoModal.ocupacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Ingresos</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.ingresos?aseguradoCtrl.aseguradoModal.ingresos:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Datos electrónicos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Página web</b></td>
+									<td class=" "><a href="{{aseguradoCtrl.aseguradoModal.pagina}}">{{aseguradoCtrl.aseguradoModal.pagina}}</a></td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Facebook</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.facebook}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Instagram</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.instagram}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Twitter</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.twitter}}</td>
+								</tr>
+								<!--								<tr class="even pointer">
+									<td class="textRight"><b>Otras Redes</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.otro}}</td>
+								</tr>-->
+							</tbody>
+						</table>
+						<table class="table table-striped jambo_table" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Correos electrónicos opcionales</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="!aseguradoCtrl.aseguradoModal.ListaCorreos ||  aseguradoCtrl.aseguradoModal.ListaCorreos.length == 0  ">
+									<td>
+										<center>No hay correos asociados
+											<center>
+									</td>
+								</tr>
+								<tr ng-show="aseguradoCtrl.aseguradoModal.ListaCorreos && aseguradoCtrl.aseguradoModal.ListaCorreos.length > 0">
+									<td>
+										<table class="table table-striped " style="margin-bottom: 0px;">
+											<!--<thead>
+												<tr>
+													<th style="width: 30%; text-align: center;">Correo</th>
+												</tr>
+											</thead>-->
+											<tbody>
+												<tr class="even pointer" ng-repeat=" item  in aseguradoCtrl.aseguradoModal.ListaCorreos">
+													<td style="text-align: center;">{{item.correo}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="modal-body" ng-show="aseguradoCtrl.naturalJuridicoRadio.juridico">
+					<div class="table-responsive">
+						<table class="table table-striped jambo_table bulk_action">
+							<thead>
+								<th class="column-title" style="text-align: center;" colspan="2">Datos generales</th>
+							</thead>
+
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight" style="width: 50%;"><b>Tipo</b></td>
+									<td class=" ">Juridico</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Empresa</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.nombre?aseguradoCtrl.aseguradoModal.nombre:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Identificación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.identificacion?aseguradoCtrl.aseguradoModal.identificacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Fecha de constitución</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.fechaConstitucion?aseguradoCtrl.aseguradoModal.fechaConstitucion:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Fecha de inicio</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.fechaInicio?aseguradoCtrl.aseguradoModal.fechaInicio:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Correo electrónico</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.correo?aseguradoCtrl.aseguradoModal.correo:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Localidad</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.localidad?aseguradoCtrl.aseguradoModal.localidad:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Direccion</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección de habitación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.direccionHabitacion?aseguradoCtrl.aseguradoModal.direccionHabitacion:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono de habitación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.telefonoHabitacion?aseguradoCtrl.aseguradoModal.telefonoHabitacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Dirección de oficina</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.direccionOficina?aseguradoCtrl.aseguradoModal.direccionOficina:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Teléfono de oficina</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.telefonoOficina?aseguradoCtrl.aseguradoModal.telefonoOficina:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Datos económicos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Profesión</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.profesion?aseguradoCtrl.aseguradoModal.profesion:'N/A'}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Ocupación</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.ocupacion?aseguradoCtrl.aseguradoModal.ocupacion:'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Ingresos</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.ingresos?aseguradoCtrl.aseguradoModal.ingresos:'N/A'}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title" style="text-align: center;" colspan="2">Datos electrónicos</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Página web</b></td>
+									<td class=" "><a href="{{aseguradoCtrl.aseguradoModal.correoElectronico}}">{{aseguradoCtrl.aseguradoModal.pagina ? aseguradoCtrl.aseguradoModal.pagina : 'N/A'}}</a></td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Facebook</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.facebook ? aseguradoCtrl.aseguradoModal.facebook : 'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Instagram</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.instagram ? aseguradoCtrl.aseguradoModal.instagram : 'N/A'}}</td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Twitter</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.twitter ? aseguradoCtrl.aseguradoModal.twitter : 'N/A'}}</td>
+								</tr>
+								<!--								<tr class="even pointer">
+									<td class="textRight"><b>Otras Redes</b></td>
+									<td class=" ">{{aseguradoCtrl.aseguradoModal.otro}}</td>
+								</tr>-->
+							</tbody>
+						</table>
+						<table class="table table-striped jambo_table" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Correos electrónicos opcionales</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="!aseguradoCtrl.aseguradoModal.ListaCorreos ||  aseguradoCtrl.aseguradoModal.ListaCorreos.length == 0  ">
+									<td>
+										<center>No hay correos asociados
+											<center>
+									</td>
+								</tr>
+								<tr ng-show="aseguradoCtrl.aseguradoModal.ListaCorreos && aseguradoCtrl.aseguradoModal.ListaCorreos.length > 0">
+									<td>
+										<table class="table table-striped " style="margin-bottom: 0px;">
+											<!--<thead>
+												<tr>
+													<th style="width: 30%; text-align: center;">Correo</th>
+												</tr>
+											</thead>-->
+											<tbody>
+												<tr class="even pointer" ng-repeat=" item  in aseguradoCtrl.aseguradoModal.ListaCorreos">
+													<td style="text-align: center;">{{item.correo}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="modal-footer textCenter">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                              AGREGAR ASEGURADOS                                         **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+	<div class="x_panel animateFade" ng-show="aseguradoCtrl.views.agregarAsegurado">
+		<div class="x_title">
+			<h2> Agregar asegurado <small>Proceso de registro de un asegurado nuevo</small></h2>
+			<!-- <ul class="nav navbar-right custom_panel_toolbox">
+				<li><a class="asegurado collapse-link"><i class="fa fa-chevron-up"></i></a>
+				</li>
+			</ul> -->
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+			<div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+				<div class="panel">
+					<a class="panel-heading collapsed" role="tab" id="aseguradoDatosGeneralesHeading" data-toggle="collapse" data-parent="#accordion"
+					 href="#aseguradoDatosGenerales" aria-expanded="true" aria-controls="datosGenerales">
+						<h4 class="panel-title">Datos generales <span class="pull-right"><i class='glyphicon glyphicon-menu-down'></i></span></h4>
+					</a>
+					<div id="aseguradoDatosGenerales" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="aseguradoDatosGeneralesHeading"
+					 aria-expanded="true" style="height: 100%;">
+						<div class="panel-body">
+							<form id="agregarAseguradoNaturalForm" data-parsley-validate class="form-horizontal form-label-left">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de persona *</label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<label class="custom_form_p"> Natural: </label>
+										<div ng-class="aseguradoCtrl.naturalJuridicoCheck.natural" style="position: relative;">
+											<input type="radio" class="flat" name="tipoPersona" ng-model="$parent.model" ng-value="realValues[0]" ng-click="aseguradoCtrl.naturalJuridicoSwitch('Natural')"
+											 style="position: absolute; opacity: 0; cursor: pointer;">
+											</input>
+										</div>
+										<label class="custom_form_p"> Jurídico: </label>
+										<div ng-class="aseguradoCtrl.naturalJuridicoCheck.juridico" style="position: relative;">
+											<input type="radio" class="flat" name="tipoPersona" ng-model="$parent.model" ng-value="realValues[1]" ng-click="aseguradoCtrl.naturalJuridicoSwitch('Juridico')"
+											 style="position: absolute; opacity: 0; cursor: pointer;">
+											</input>
+										</div>
+									</div>
+								</div>
+
+								<div class="animateFade" ng-show="aseguradoCtrl.naturalJuridicoRadio.natural">
+									<div id="aseguradoNaturalForm" data-parsley-validate class="form-horizontal form-label-left">
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre completo <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input id="nombreNatural" ng-model="aseguradoCtrl.formularioAseguradoNatural.nombreCompleto" type="text" class="form-control has-feedback-left"
+												 placeholder="Nombre completo" data-validate-length-range="3" required="required">
+												<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cédula <span class="required">*</span></label>
+											<div class="col-md-2 col-sm-2 col-xs-4 no-padding-right">
+												<select required='required' class="form-control" ng-model="aseguradoCtrl.formularioAseguradoNatural.txNacionalidad">
+													<!--ng-change="aseguradoCtrl.tipoCedulaSwitch()">-->
+													<option value="">Seleccione..</option>
+													<option>E-</option>
+													<option>V-</option>
+                          <option>A-</option>
+												</select>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-8">
+												<input type="text" class="form-control has-feedback-left col-md-7 col-xs-12" placeholder="Cédula" data-validate-length-range="3"
+												 required="required" type="text" ng-model="aseguradoCtrl.formularioAseguradoNatural.identificacion" ng-blur="aseguradoCtrl.tipoCedulaSwitch()"
+												 ui-mask="9999999?9?9?9" ui-mask-placeholder ui-mask-placeholder-char="space">
+												<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Sexo</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<label class="custom_form_p"> M: </label>
+											<div ng-class="aseguradoCtrl.naturalSexoCheck.m" style="position: relative;">
+												<input type="radio" class="flat" name="sexo" ng-model="$parent.model" ng-click="aseguradoCtrl.naturalSexoSwitch('m')" style="position: absolute; opacity: 0; cursor: pointer;">
+												</input>
+											</div>
+											<label class="custom_form_p"> F: </label>
+											<div ng-class="aseguradoCtrl.naturalSexoCheck.f" style="position: relative;">
+												<input type="radio" class="flat" name="sexo" ng-model="$parent.model" ng-click="aseguradoCtrl.naturalSexoSwitch('f')" style="position: absolute; opacity: 0; cursor: pointer;">
+												</input>
+											</div>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de nacimiento</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<a class="dropdown-toggle" id="dropdownFechaNacimiento" role="button" data-toggle="dropdown" data-target="#">
+												<div class="no-margin-bottom">
+													<input readonly="readonly" type="text" id="fechaNacimientoNatural" class="form-control has-feedback-left" data-ng-model="aseguradoCtrl.formularioAseguradoNatural.fechaNacimiento"
+													 required="required" placeholder="DD-MM-YYYY">
+													<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</a>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+												<datetimepicker data-ng-model="aseguradoCtrl.formularioAseguradoNatural.fechaNacimiento" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaNacimientoNatural')"
+												 data-datetimepicker-config="{ dropdownSelector: '#dropdownFechaNacimiento', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+											</ul>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label has-feedback-left col-md-3 col-sm-3 col-xs-12">Estado civil </label>
+										<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+											<select class="form-control" ng-model="aseguradoCtrl.formularioAseguradoNatural.estadoCivil">
+												<option value="">Seleccione..</option>
+												<option>Soltero</option>
+												<option>Casado</option>
+												<option>Divorciado</option>
+												<option>Viudo</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Teléfono celular</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="telefonoNatural" ng-model="aseguradoCtrl.formularioAseguradoNatural.telefono" class="form-control has-feedback-left"
+											placeholder="(0212) 123-45-67" data-validate-length-range="3" required="required" ui-mask="(9999) 999-9999" ui-mask-placeholder
+											 ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Correo electrónico</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="email" id="correoElectronicoNatural" ng-model="aseguradoCtrl.formularioAseguradoNatural.correo" class="form-control has-feedback-left"
+											 placeholder="Correo electrónico" data-validate-length-range="3" required="required">
+											<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Localidad </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="localidadNatural" ng-model="aseguradoCtrl.formularioAseguradoNatural.localidad" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Localidad">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="animateFade" ng-show="aseguradoCtrl.naturalJuridicoRadio.juridico">
+									<div id="aseguradoJuridicoForm">
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Empresa <span class="required">*</span>	</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input id="empresaJuridico" ng-model="aseguradoCtrl.formularioAseguradoJuridico.empresa" type="text" class="form-control has-feedback-left"
+												 placeholder="Nombre de la empresa" data-validate-length-range="3" required="required">
+												<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">RIF <span class="required">*</span></label>
+											<div class="col-md-2 col-sm-2 col-xs-4 no-padding-right">
+												<select class="form-control" ng-model="aseguradoCtrl.formularioAseguradoNatural.txNacionalidad">
+													<option value="">Seleccione..</option>
+													<option>G-</option>
+													<option>J-</option>
+												</select>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-8">
+												<input type="text" id="rifJuridico" ng-model="aseguradoCtrl.formularioAseguradoJuridico.rif" class="form-control has-feedback-left col-md-7 col-xs-12"
+												 data-validate-length-range="3" ui-mask="9999999?9?9" ui-mask-placeholder ui-mask-placeholder-char="space" required="required">
+												<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de constitución</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target="#">
+												<div class="no-margin-bottom">
+													<input type="text" readonly="readonly" id="fechaConstitucionJuridico" name="date" class="form-control has-feedback-left" placeholder="DD-MM-YYYY"
+													 data-ng-model="aseguradoCtrl.formularioAseguradoJuridico.fechaConstitucion" required="required" modelType: 'DD-MM-YYYY'>
+													<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</a>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+												<datetimepicker data-ng-model="aseguradoCtrl.formularioAseguradoJuridico.fechaConstitucion" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaConstitucionJuridico')" data-datetimepicker-config="{ dropdownSelector: '#dropdown', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }" data-before-render="aseguradoCtrl.beforeRenderConstitucion($dates)"></datetimepicker>
+											</ul>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de inicio </label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#">
+												<div class="no-margin-bottom">
+													<input type="text" readonly="readonly" id="fechaInicioJuridico" class="form-control has-feedback-left" data-ng-model="aseguradoCtrl.formularioAseguradoJuridico.fechaInicio"
+													 required="required" placeholder="DD-MM-YYYY">
+													<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</a>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+												<datetimepicker data-ng-model="aseguradoCtrl.formularioAseguradoJuridico.fechaInicio" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaInicioJuridico')" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+											</ul>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Correo electrónico</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="email" id="correoElectronicoJuridico" ng-model="aseguradoCtrl.formularioAseguradoJuridico.correo" class="form-control has-feedback-left"
+											 placeholder="Correo electrónico" data-validate-length-range="3" required="required">
+											<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Localidad</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" id="localidadJuridico" ng-model="aseguradoCtrl.formularioAseguradoJuridico.localidad" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Localidad">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<a class="panel-heading collapsed" role="tab" id="aseguradoDireccionHeading" data-toggle="collapse" data-parent="#accordion"
+					 href="#aseguradoDireccion" aria-expanded="false" aria-controls="aseguradoDireccion">
+						<h4 class="panel-title">Dirección <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+					</a>
+					<div id="aseguradoDireccion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoDireccionHeading"
+					 aria-expanded="false" style="height: 0px;">
+						<div class="panel-body">
+							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección de habitación
+							  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.direccionHabitacion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="3" required="required" placeholder="Dirección de habitación">
+										<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono de habitación
+							  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.telefonoHabitacion" type="tel" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="7,20" required="required" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder
+										 ui-mask-placeholder-char="_">
+										<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección de oficina
+							  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.direccionOficina" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="3" required="required" placeholder="Dirección de oficina">
+										<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono de oficina
+							  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.telefonoOficina" type="tel" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="7,20" required="required" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder
+										 ui-mask-placeholder-char="_">
+										<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<a class="panel-heading collapsed" role="tab" id="aseguradoCorreoElectronicoHeading" data-toggle="collapse" data-parent="#accordion"
+					 href="#aseguradoCorreoElectronico" aria-expanded="false" aria-controls="aseguradoCorreoElectronico">
+						<h4 class="panel-title">Correo Electrónico <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+					</a>
+					<div id="aseguradoCorreoElectronico" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoCorreoElectronicoHeading"
+					 aria-expanded="false" style="height: 0px;">
+						<div class="panel-body">
+							<form id="formularioAgregarAseguradoCorreoElectronico" data-parsley-validate class="form-horizontal form-label-left">
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo electrónico</label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.correo" type="email" id="agregarAseguradoCorreoElectronico" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="3" required="required" placeholder="Correo electrónico">
+										<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+									</div>
+
+								</div>
+							</form>
+							<div class="item form-group">
+								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+									</br>
+									<button type="button" class="btn btn-success col-sm-2 col-sm-offset-5" ng-click="aseguradoCtrl.agregarCorreo()">Agregar</button>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+
+						</br>
+						<div class="item form-group">
+							<div class="col-md-12 col-sm-12 col-xs-12  " ng-show="aseguradoCtrl.ListaCorreos.length > 0">
+								<!--Inicio de tabla-->
+								<div class="x_panel">
+									<div class="x_title">
+										<h2>Lista de correo electrónicos</h2>
+										<div class="clearfix"></div>
+									</div>
+									<div class="x_content">
+										<div class="table-responsive" style="height: 250px; overflow-y: auto;" >
+											<table class="table table-striped jambo_table bulk_action">
+												<thead>
+													<tr role="row">
+														<th style="text-align: center;">Correo</th>
+														<th style="text-align: center;" aria-label="">Acción</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="item in aseguradoCtrl.ListaCorreos">
+														<td style=" text-align: center;">{{item.correo}}</td>
+														<td style=" text-align: center;">
+															<a style="margin-right: 10px" ng-click="aseguradoCtrl.editarCorreo(item)"><i class="fa fa-pencil"></i></a>
+															<a style="margin-right: 10px" ng-click="aseguradoCtrl.eliminarCorreo(item)"><i class="fa fa-trash-o"></i></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!--fin de tabla-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<a class="panel-heading collapsed" role="tab" id="aseguradoDatosEconomicosHeading" data-toggle="collapse" data-parent="#accordion"
+					 href="#aseguradoDatosEconomicos" aria-expanded="false" aria-controls="aseguradoDatosEconomicos">
+						<h4 class="panel-title">Datos económicos <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+					</a>
+					<div id="aseguradoDatosEconomicos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoDatosEconomicosHeading"
+					 aria-expanded="false" style="height: 0px;">
+						<div class="panel-body">
+							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Profesión
+                  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.profesion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="3" required="required" placeholder="Profesión">
+										<span class="fa fa-graduation-cap form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ocupación
+                  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.ocupacion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 data-validate-length-range="3" required="required" placeholder="Ocupación">
+										<span class="fa fa-suitcase form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ingresos</label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.ingresos" type="text" id="ingresosAsegurado" placeholder="Ingresos" class="form-control has-feedback-left col-md-7 col-xs-12"
+										 required="required">
+										<span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel">
+					<a class="panel-heading collapsed" role="tab" id="aseguradoDatosElectronicosHeading" data-toggle="collapse" data-parent="#accordion"
+					 href="#aseguradoDatosElectronicos" aria-expanded="false" aria-controls="aseguradoDatosElectronicos">
+						<h4 class="panel-title">Datos electrónicos <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+					</a>
+					<div id="aseguradoDatosElectronicos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoDatosElectronicosHeading"
+					 aria-expanded="false" style="height: 0px;">
+						<div class="panel-body">
+							<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Página web
+						  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.pagina" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+										 placeholder="Página web">
+										<span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Facebook
+						  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.facebook" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+										 placeholder="Facebook">
+										<span class="fa fa-facebook form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Instagram
+						  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.instagram" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+										 placeholder="Instagram">
+										<span class="fa fa-instagram form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Twitter
+						  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.twitter" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+										 placeholder="Twitter">
+										<span class="fa fa-twitter form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>
+								<!--								<div class="item form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Otras redes
+						  </label>
+									<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+										<input ng-model="aseguradoCtrl.formularioAsegurado.otro" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+										 placeholder="Otra Red">
+										<span class="fa fa-at form-control-feedback left" aria-hidden="true"></span>
+									</div>
+								</div>-->
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			</br>
+
+			<div class="item form-group">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+					<button type="submit" ng-click="aseguradoCtrl.funcasd()" class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3">Guardar</button>
+					<button type="submit" ng-click="aseguradoCtrl.cancelar()" class="btn btn-primary col-sm-3 col-md-3 col-xs-3">Cancelar</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                              EDITAR ASEGURADOS                                          **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+	<div class="activarEditarAsegurado" ng-click="aseguradoCtrl.editar()"></div>
+	<div class="animateFade" ng-show="aseguradoCtrl.views.editarAsegurado">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2> Editar Asegurado <small>Proceso de edición de un asegurado</small></h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+
+				<div class="accordion" id="accordionEdit" role="tablist" aria-multiselectable="true">
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="aseguradoEditarDatosGeneralesHeading" data-toggle="collapse" data-parent="#accordionEdit"
+						 href="#aseguradoEditarDatosGenerales" aria-expanded="true" aria-controls="aseguradoEditarDatosGenerales">
+							<h4 class="panel-title">Datos generales <span class="pull-right"><i class='glyphicon glyphicon-menu-down'></i></span></h4>
+						</a>
+						<div id="aseguradoEditarDatosGenerales" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="aseguradoEditarDatosGeneralesHeading"
+						 aria-expanded="true" style="height: 100%;">
+							<div class="panel-body">
+								<form data-parsley-validate class="form-horizontal form-label-left">
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de persona *</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<label class="custom_form_p"> Natural: </label>
+											<div class="{{aseguradoCtrl.naturalJuridicoCheck.natural}}" style="position: relative;">
+												<input id="naturalCheck" ng-click="aseguradoCtrl.naturalJuridicoSwitch('Natural')" type="radio" class="flat" name="tipoPersona"
+												 ng-model="$parent.model" ng-value="realValues[0]" style="position: absolute; opacity: 0; cursor: pointer;">
+												</input>
+											</div>
+											<label class="custom_form_p"> Jurídico: </label>
+											<div class="{{aseguradoCtrl.naturalJuridicoCheck.juridico}}" style="position: relative;">
+												<input id="JuridicoCheck" ng-click="aseguradoCtrl.naturalJuridicoSwitch('Juridico')" type="radio" class="flat" name="tipoPersona"
+												 ng-model="$parent.model" ng-value="realValues[1]" style="position: absolute; opacity: 0; cursor: pointer;">
+												</input>
+											</div>
+										</div>
+									</div>
+									<div class="animateFade" ng-show="aseguradoCtrl.naturalJuridicoRadio.natural">
+										<div id="EditarAseguradoNaturalForm">
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre completo <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input id="nombreNatural2" ng-model="aseguradoCtrl.editarAseguradoVa.nombre" type="text" class="form-control has-feedback-left"
+													 placeholder="Nombre completo" data-validate-length="3" required="required">
+													<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cédula <span class="required">*</span></label>
+												<div class="col-md-2 col-sm-2 col-xs-4 no-padding-right">
+													<select class="form-control" disabled="disabled" ng-model="aseguradoCtrl.editarAseguradoVa.txNacionalidad">
+															<!--ng-change="aseguradoCtrl.tipoCedulaSwitch()">-->
+															<option value="">Seleccione..</option>
+															<option>E-</option>
+															<option>V-</option>
+                         			<option>A-</option>
+														</select>
+												</div>
+												<div class="col-md-4 col-sm-4 col-xs-8">
+													<input id="identificacionNatural2" type="text" readonly="readonly" class="form-control has-feedback-left col-md-7 col-xs-12"
+													 ng-model="aseguradoCtrl.editarAseguradoVa.identificacion">
+													<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12">Sexo </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<label class="custom_form_p"> M: </label>
+												<div class="{{aseguradoCtrl.naturalSexoCheck.m}}" style="position: relative;">
+													<input type="radio" class="flat" name="sexo" ng-model="$parent.model" ng-click="aseguradoCtrl.naturalSexoSwitch('m')" style="position: absolute; opacity: 0; cursor: pointer;">
+													</input>
+												</div>
+												<label class="custom_form_p"> F: </label>
+												<div class="{{aseguradoCtrl.naturalSexoCheck.f}}" style="position: relative;">
+													<input type="radio" class="flat" name="sexo" ng-model="$parent.model" ng-click="aseguradoCtrl.naturalSexoSwitch('f')" style="position: absolute; opacity: 0; cursor: pointer;">
+													</input>
+												</div>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de nacimiento </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<a class="dropdown-toggle" id="dropdownFechaNacimiento" role="button" data-toggle="dropdown" data-target="#">
+													<div class="no-margin-bottom">
+														<input type="text" id="fechaNacimientoNatural2" class="form-control has-feedback-left" data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaNacimiento"
+														 required="required" placeholder="DD-MM-YYYY">
+														<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+													</div>
+												</a>
+												<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+													<datetimepicker data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaNacimiento" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaNacimientoNatural2')"
+													 data-datetimepicker-config="{ dropdownSelector: '#dropdownFechaNacimiento', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+												</ul>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label has-feedback-left col-md-3 col-sm-3 col-xs-12">Estado civil</label>
+											<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+												<select class="form-control" ng-model="aseguradoCtrl.editarAseguradoVa.estadoCivil">
+													<option value ="">Seleccione..</option>
+													<option>Soltero</option>
+													<option>Casado</option>
+													<option>Divorciado</option>
+													<option>Viudo</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono celular </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input id="telefonoNatural2" type="text" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="aseguradoCtrl.editarAseguradoVa.telefono"
+												 placeholder="(0212) 123-45-67" data-validate-length-range="3" required="required" ui-mask="(9999) 999-9999" ui-mask-placeholder
+												 ui-mask-placeholder-char="space">
+												<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Correo electrónico </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input id="correoElectronicoNatural2" type="email" class="form-control has-feedback-left" ng-model="aseguradoCtrl.editarAseguradoVa.correo"
+												 placeholder="Correo electrónico" data-validate-length-range="3" required="required">
+												<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Localidad</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input id="localidadNatural2" type="text" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="aseguradoCtrl.editarAseguradoVa.localidad"
+												 placeholder="Localidad" data-validate-length-range="3" required="required">
+												<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="animateFade" ng-show="aseguradoCtrl.naturalJuridicoRadio.juridico">
+										<div id="EditarAseguradoJuridicoForm">
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Empresa <span class="required">*</span></label>
+												<div class="col-md-6 col-sm-6 col-xs-12">
+													<input id="empresaJuridico2" ng-model="aseguradoCtrl.editarAseguradoVa.nombre" class="form-control has-feedback-left" placeholder="Empresa"
+													 data-validate-length-range="3" required="required" type="text">
+													<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+
+											<div class="item form-group">
+												<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">RIF <span class="required">*</span></label>
+												<div class="col-md-2 col-sm-2 col-xs-4 no-padding-right">
+													<select class="form-control" disabled="disabled" ng-model="aseguradoCtrl.editarAseguradoVa.txNacionalidad" readonly="readonly">
+															<!--ng-change="aseguradoCtrl.tipoCedulaSwitch()">-->
+															<option value="">Seleccione..</option>
+															<option>G-</option>
+															<option>J-</option>
+														</select>
+												</div>
+												<div class="col-md-4 col-sm-4 col-xs-8">
+													<input id="rifJuridico2" readonly="readonly" ng-model="aseguradoCtrl.editarAseguradoVa.identificacion" class="form-control has-feedback-left col-md-7 col-xs-12"
+													 type="text">
+													<span class="fa fa-list-alt form-control-feedback left" aria-hidden="true"></span>
+												</div>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de constitución </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target="#" href="#">
+													<div class="no-margin-bottom">
+														<input type="text" id="fechaConstitucionJuridico2" name="date" class="form-control has-feedback-left" data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaConstitucion"
+														 required="required" placeholder="DD-MM-YYYY">
+														<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+													</div>
+												</a>
+												<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+													<datetimepicker data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaConstitucion" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaConstitucionJuridico2')"
+													 data-datetimepicker-config="{ dropdownSelector: '#dropdown', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+												</ul>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de inicio </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+													<div class="no-margin-bottom">
+														<input type="text" id="fechaInicioJuridico2" class="form-control has-feedback-left" data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaInicio"
+														 required="required" placeholder="DD-MM-YYYY">
+														<span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+													</div>
+												</a>
+												<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+													<datetimepicker data-ng-model="aseguradoCtrl.editarAseguradoVa.fechaInicio" data-on-set-time="aseguradoCtrl.cambiarFecha('fechaInicioJuridico2')"
+													 data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+												</ul>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Correo electrónico </label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input type="email" id="correoElectronicoJuridico2" ng-model="aseguradoCtrl.editarAseguradoVa.correo" class="form-control has-feedback-left"
+												 placeholder="Correo electrónico" data-validate-length-range="3" required="required">
+												<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Localidad</label>
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input type="text" id="localidadJuridico2" ng-model="aseguradoCtrl.editarAseguradoVa.localidad" class="form-control has-feedback-left col-md-7 col-xs-12"
+												 data-validate-length-range="3" required="required" placeholder="Localidad">
+												<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estatus </label>
+										<div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+											<select class="form-control" ng-model="aseguradoCtrl.editarAseguradoVa.estatus">
+												<option value="">Seleccione..</option>
+												<option >Activo</option>
+												<option >Inactivo</option>
+											</select>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="aseguradoEditarDireccionHeading" data-toggle="collapse" data-parent="#accordionEdit"
+						 href="#aseguradoEditarDireccion" aria-expanded="false" aria-controls="aseguradoeditarDireccion">
+							<h4 class="panel-title">Dirección <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="aseguradoEditarDireccion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoEditarDireccionHeading"
+						 aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+								<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección de habitación</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.direccionHabitacion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Dirección de habitación">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono de habitación</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.telefonoHabitacion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="7,20" required="required" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder
+											 ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dirección de oficina</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.direccionOficina" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Dirección de oficina">
+											<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono de oficina</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.telefonoOficina" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="7,20" required="required" placeholder="(0212) 123-45-67" ui-mask="(9999) 999-9999" ui-mask-placeholder
+											 ui-mask-placeholder-char="_">
+											<span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="editarAseguradoCorreoElectronicoHeading" data-toggle="collapse" data-parent="#accordionEdit"
+						href="#editarAseguradoCorreoElectronico" aria-expanded="false" aria-controls="editarAseguradoCorreoElectronico">
+							<h4 class="panel-title">Correo electrónico <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="editarAseguradoCorreoElectronico" class="panel-collapse collapse" role="tabpanel" aria-labelledby="editarAseguradoCorreoElectronicoHeading"
+						aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+								<form id="editarFormularioAseguradoCorreoElectronico" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo electrónico</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.correo" type="email" id="agregareditarAseguradoCorreoElectronico" class="form-control has-feedback-left col-md-7 col-xs-12"
+											data-validate-length-range="3" required="required" placeholder="Correo electrónico">
+											<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+										</div>
+
+									</div>
+								</form>
+								<div class="item form-group">
+									<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+										</br>
+										<button type="button" class="btn btn-success col-sm-2 col-sm-offset-5" ng-click="aseguradoCtrl.agregarCorreo()">Agregar</button>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+
+							</br>
+							<div class="item form-group">
+								<div class="col-md-12 col-sm-12 col-xs-12  " ng-show="aseguradoCtrl.editarAseguradoVa.ListaCorreos.length > 0">
+									<!--Inicio de tabla-->
+									<div class="x_panel">
+										<div class="x_title">
+											<h2>Lista de correo electrónicos</h2>
+											<div class="clearfix"></div>
+										</div>
+										<div class="x_content">
+											<div class="table-responsive" style="height: 250px; overflow-y: auto;" >
+												<table class="table table-striped jambo_table bulk_action">
+													<thead>
+														<tr role="row">
+															<th style="text-align: center;">Correo</th>
+															<th style="text-align: center;" aria-label="">Acción</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="item in aseguradoCtrl.editarAseguradoVa.ListaCorreos">
+															<td style=" text-align: center;">{{item.correo}}</td>
+															<td style=" text-align: center;">
+																<a style="margin-right: 10px" ng-click="aseguradoCtrl.editarCorreo(item)"><i class="fa fa-pencil"></i></a>
+																<a style="margin-right: 10px" ng-click="aseguradoCtrl.eliminarCorreo(item)"><i class="fa fa-trash-o"></i></a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<!--fin de tabla-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="aseguradoEditarDatosEconomicosHeading" data-toggle="collapse" data-parent="#accordionEdit"
+						 href="#aseguradoEditarDatosEconomicos" aria-expanded="false" aria-controls="aseguradoEditarDatosEconomicos">
+							<h4 class="panel-title">Datos económicos <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="aseguradoEditarDatosEconomicos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoEditarDatosEconomicosHeading"
+						 aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+								<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Profesión</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.profesion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Profesión">
+											<span class="fa fa-graduation-cap form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ocupación</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.ocupacion" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Ocupación">
+											<span class="fa fa-suitcase form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ingresos</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.ingresos" type="text" class="form-control has-feedback-left col-md-7 col-xs-12"
+											 data-validate-length-range="3" required="required" placeholder="Ingresos" ui-mask="9?9?9?9?9?9?9?9?9?99?9?9?9?9?9?9?9?9?9"
+											 ui-mask-placeholder ui-mask-placeholder-char="space">
+											<span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel">
+						<a class="panel-heading collapsed" role="tab" id="aseguradoEditarDatosElectronicosHeading" data-toggle="collapse" data-parent="#accordionEdit"
+						 href="#aseguradoEditarDatosElectronicos" aria-expanded="false" aria-controls="aseguradoEditarDatosElectronicos">
+							<h4 class="panel-title">Datos electrónicos <span class="pull-right"><i class='glyphicon glyphicon-menu-left'></i></span></h4>
+						</a>
+						<div id="aseguradoEditarDatosElectronicos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="aseguradoEditarDatosElectronicosHeading"
+						 aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+								<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Página web</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.pagina" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+											 placeholder="Página Web">
+											<span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Facebook</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.facebook" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+											 placeholder="Facebook">
+											<span class="fa fa-facebook form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Instagram</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.instagram" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+											 placeholder="Instagram">
+											<span class="fa fa-instagram form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Twitter</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.twitter" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+											 placeholder="Twitter">
+											<span class="fa fa-twitter form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>
+									<!--<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Otras redes</label>
+										<div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+											<input ng-model="aseguradoCtrl.editarAseguradoVa.otro" type="text" class="form-control has-feedback-left" data-validate-length-range="3"
+											 placeholder="Otra Red">
+											<span class="fa fa-at form-control-feedback left" aria-hidden="true"></span>
+										</div>
+									</div>-->
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ln_solid"></div>
+				<div class="item form-group">
+					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+						<button id="send" class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="aseguradoCtrl.funcasd2()">Guardar</button>
+						<button type="submit" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="aseguradoCtrl.viewsController('listarAsegurados')">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                ELIMNAR ASEGURADO                                           **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+	<div class="modal fade eliminarAseguradoModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+				<div class="modal-header text-center">
+					<h4 class="modal-title" id="myModalLabel">¡Advertencia!</h4>
+				</div>
+
+				<div class="modal-body">
+					<h5 class="text-center">¿Está seguro que desea eliminar "<b>{{aseguradoCtrl.eliminarAsegurado.nombre}}</b>"?</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="aseguradoCtrl.eliminarModal('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="aseguradoCtrl.eliminarModal('cancelar')">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                             CONSULTAR ASEGURADOS                                        **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+	<div id="listarAsegurados" class="row animateFade" ng-show="aseguradoCtrl.views.listarAsegurados">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Consultar asegurados<small>Lista de asegurados</small></h2>
+				<!-- <ul class="nav navbar-right custom_panel_toolbox">
+					<li><a class="asegurado collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul> -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<table id="tablaConsultarAsegurados" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Asegurado</th>
+							<th>Identificación</th>
+							<th>Estatus</th>
+							<th>Acción</th>
+						</tr>
+					</thead>
+					<!--           <tbody>
+            <tr ng-repeat="tablaItem in aseguradoCtrl.tableItems">
+              <td>{{tablaItem.nombre}}</td>
+              <td>{{tablaItem.tipo}}</td>
+              <td>{{tablaItem.identificacion}}</td>
+              <td>{{tablaItem.correoElectronico}}</td>
+              <td style="text-align: center;">
+                <a style="margin-right: 10px" data-toggle="modal" data-target=".verAseguradoModal" ng-click="aseguradoCtrl.ver(tablaItem)">
+                  <i class="fa fa-search"></i>
+                </a>
+                <a style="margin-right: 10px" ng-click="aseguradoCtrl.editar(tablaItem)">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a style="margin-right: 10px" data-toggle="modal" data-target=".eliminarAseguradoModal" ng-click="aseguradoCtrl.eliminar(tablaItem)">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody> -->
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                             CARGA DE ASEGURADOS                                        **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+	<div class="animateFade" ng-show="aseguradoCtrl.views.cagarAsegurados">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2> Carga de asegurados <small>Proceso de carga de asegurados.</small></h2>
+				<!-- <ul class="nav navbar-right custom_panel_toolbox">
+					<li><a class="asegurado collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul> -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="ln_solid"></div>
+				<div class="item form-group">
+					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+						<button id="send" class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="aseguradoCtrl">Guardar</button>
+						<button type="submit" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="aseguradoCtrl">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

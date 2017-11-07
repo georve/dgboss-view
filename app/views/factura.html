@@ -1,0 +1,1252 @@
+<div class="right_col" ng-controller="facturaController as facturaCtrl">
+
+  <div class="consultarFacturasVer" ng-click="facturaCtrl.ver()"></div>
+  <div class="consultarFacturasImprimir" ng-click="facturaCtrl.imprimir()"></div>
+  <div class="consultarFacturasEliminar" ng-click="facturaCtrl.eliminar()"></div>
+  <div class="consultarFacturasNotas" ng-click="facturaCtrl.ventanaNotas()"></div>
+  <div class="consultarFacturasNotasDebitoCredito" ng-click="facturaCtrl.consultarNotas()"></div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                VER AGREGARFACTURA ITEM                                  **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div class="modal fade verFacturaModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header paddingLeft30">
+          <h4 id="myModalLabel" class="modal-title">Datos del elemento</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+                <th class="column-title" colspan="2" style="text-align: center;">Datos del elemento</th>
+              </thead>
+
+              <tbody>
+                <tr class="even pointer">
+                  <td class="textRight" style="width: 50%;"><b>Resumen</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.resumen ? facturaCtrl.detalleFactura2.resumen : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>Cantidad</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.cantidad ? facturaCtrl.detalleFactura2.cantidad : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>Precio unidad</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.precioUnidad ? facturaCtrl.detalleFactura2.precioUnidad : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>Subtotal elemento</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.cantidad*facturaCtrl.detalleFactura2.precioUnidad ?  facturaCtrl.detalleFactura2.cantidad*facturaCtrl.detalleFactura2.precioUnidad : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>IVA</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.iva ? facturaCtrl.detalleFactura2.iva : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>Total elemento</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.totalItem ?  facturaCtrl.detalleFactura2.totalItem : 'N/A'}}</td>
+                </tr>
+                <tr class="odd pointer">
+                  <td class="textRight"><b>Descripción</b></td>
+                  <td class=" ">{{facturaCtrl.detalleFactura2.descripcion ? facturaCtrl.detalleFactura2.descripcion : 'N/A'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer textCenter">
+          <button  class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                ELIMINAR ITEM                                          **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div class="modal fade eliminarItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header text-center">
+          <h4 class="modal-title" id="myModalLabel">¡Advertencia!</h4>
+        </div>
+
+        <div class="modal-body">
+          <h5 class="text-center">¿Está seguro que desea eliminar el elemento?</h5>
+          </br>
+          <div class="row text-center">
+            <button  class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="facturaCtrl.eliminarItem2('aceptar')">Aceptar</button>
+            <button  class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="facturaCtrl.eliminarModal('cancelar')">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                AGREGAR FACTURA                                          **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div id="agregarFactura" ng-show="facturaCtrl.views.agregarFactura" class="row animateFade">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Agregar factura <small>Proceso para agregar una factura</small></h2>
+
+          <div class="clearfix">
+          </div>
+        </div>
+
+        <div class="x_content">
+
+          <div id="facturaWizard">
+            <ul>
+              <li><a href="#facturaWizardPaso1">Paso 1</br><small>Búsqueda del cliente.</small></a></li>
+              <li><a href="#facturaWizardPaso2">Paso 2</br><small>Detalle de la factura</small></a></li>
+            </ul>
+
+            <div class="sw-container tab-content">
+              <div id="facturaWizardPaso1" class="">
+                <!--  style="height: 575px;" -->
+
+                <h2>Búsqueda del cliente</h2>
+
+                </br>
+
+                <form class="form-horizontal form-label-left">
+
+                  <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cliente <span class="required">*</span>
+										</label>
+                    <div ng-class="facturaCtrl.paraCombo.tamanio">
+                      <select class="form-control no-padding-right no-padding-left" ng-model="facturaCtrl.facturaDatos.para" ng-change="facturaCtrl.paraComboChange()"
+                        ng-options="tipoPersona.coTipoPersona as tipoPersona.nbTipoPersona for tipoPersona in facturaCtrl.listaTipoPersona">
+      											<option value="">Seleccione...</option>
+      										</select>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12 no-padding-right" ng-show='facturaCtrl.paraInput.input'>
+                      <div class="col-md-12 col-sm-12 col-xs-12 no-padding-right no-padding-left no-margin">
+                        <input id="formularioAgregarFacturaInputAutocompletar" type="text" class="form-control autocompletarIDFactura" ng-model="facturaCtrl.facturaDatos.identificacion"
+                          data-validate-length-range="3" required="required" ng-blur="">
+                      </div>
+                    </div>
+
+                    <div class="col-md-1 col-sm-1 col-xs-12 no-padding-left" ng-show="facturaCtrl.paraInput.button">
+                      <button class="btn btn-success noBorderLeft" ng-click="facturaCtrl.showTable()">
+                                            <span class="fa fa-search" aria-hidden="true"></span>
+    	                               </button>
+                    </div>
+
+                  </div>
+
+                  <div class="item form-group" ng-show="facturaCtrl.facturaDatos.tableVisibility">
+                    <div class="col-md-8 col-sm-8 col-sm-offset-2 col-md-offset-2 col-xs-12">
+                      <div class="table responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                          <thead>
+                            <tr class="headings">
+                              <th class="column-title textCenter" colspan="2">Datos generales</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr class="even pointer">
+                              <td class="textRight tdCenter2"><b>Identificación</b></td>
+                              <td class=" " ng-model="facturaCtrl.facturaDatos.nombre">{{facturaCtrl.facturaDatos.cliente.nombre}}</td>
+                            </tr>
+                            <tr class="odd pointer">
+                              <td class="textRight"><b>Teléfono(s)</b></td>
+                              <td class=" " ng-model="facturaCtrl.facturaDatos.telefono">{{facturaCtrl.facturaDatos.cliente.telefono}}</td>
+                            </tr>
+                            <tr class="even pointer">
+                              <td class="textRight"><b>Dirección</b></td>
+                              <td class=" " ng-model="facturaCtrl.facturaDatos.direccion">{{facturaCtrl.facturaDatos.cliente.direccion}}</td>
+                            </tr>
+                            <tr class="odd pointer">
+                              <td class="textRight"><b>Correo electrónico</b></td>
+                              <td class=" " ng-model="facturaCtrl.facturaDatos.correo">{{facturaCtrl.facturaDatos.cliente.correo}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="item form-group">
+                    <div class="col-md-8 col-sm-8 col-sm-offset-2 col-md-offset-2 col-xs-12">
+                      <div class="table responsive no-margin-bottom">
+                        <table class="table table-striped jambo_table bulk_action no-margin-bottom">
+                          <thead>
+                            <tr class="headings">
+                              <th class="column-title textCenter">Datos de la factura</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr class="even pointer">
+                              <td class="textCenter">
+                                </br>
+                                <div class="item form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Número factura<span class="required">*</span></label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12 no-padding-right">
+                                    <input type="text" id="formularioAgregarFacturaNumeroFactura" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.facturaDatos.numeroFactura"
+                                      placeholder="Número factura" required="required" />
+                                    <span class="fa fa-file-text form-control-feedback left" aria-hidden="true"></span>
+                                  </div>
+                                </div>
+
+                                <div class="item form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha emisión<span class="required">*</span>
+																	</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12 no-padding-right">
+                                    <a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target="#" >
+                                      <div class="no-margin-bottom">
+                                        <input type="text" id="formularioAgregarFacturaFecha" name="date" class="form-control has-feedback-left" data-ng-model="facturaCtrl.facturaDatos.fechaRegistro"
+                                          required="required" placeholder="Fecha emisión" ng-readonly="true">
+                                        <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                                      </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                      <datetimepicker data-ng-model="facturaCtrl.facturaDatos.fechaRegistro" data-on-set-time="facturaCtrl.cambiarFecha('agregar')"
+                                       data-before-render="facturaCtrl.setBeforeDate($dates); facturaCtrl.beforeRenderEmision($dates)"  data-datetimepicker-config="{ dropdownSelector: '#dropdown', startView:'day', minView:'day', modelType: 'YYYY-MM-DD' }"></datetimepicker>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="item form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Número de control<span class="required">*</span>
+																	</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12 no-padding-right">
+                                    <input type="number" id="formularioAgregarFacturaNumeroControl" class="form-control has-feedback-left col-md-7 col-xs-12"
+                                      ng-model="facturaCtrl.facturaDatos.numeroControl" required="required" placeholder="00-00000"
+                                    />
+                                    <span class="fa fa-file-text form-control-feedback left" aria-hidden="true"></span>
+                                  </div>
+                                </div>
+                                <div class="item form-group">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Observaciones
+																	</label>
+                                  <div class="col-md-8 col-sm-8 col-xs-12 no-padding-right" style="text-align: left;">
+                                    <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-validation-threshold="10"
+                                      style="margin-top: 0px; margin-bottom: 0px; height: 96px;" ng-model="facturaCtrl.facturaDatos.observaciones"
+                                      maxlength="100"></textarea>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                </br>
+              </div>
+
+
+              <div id="facturaWizardPaso2" class="">
+
+                <h2>Detalle de la factura</h2>
+
+                </br>
+
+                <form class="form-horizontal form-label-left" data-parsley-validate>
+
+                  <div id="objetoDatos" ng-show="facturaCtrl.facturaDatos.agregarElemento">
+
+                    <div class="item form-group" >
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Cantidad <span class="required">*</span>
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                        <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.detalleFactura.cantidad"
+                          placeholder="Cant." required="required" />
+                        <span class="fa fa-plus form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="item form-group" >
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Precio unidad <span class="required">*</span>
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                        <input type="text" class=" form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.detalleFactura.precioUnidad" ui-number-mask="2"
+                          placeholder="Precio unid." required="required" id="detalleFacturaPrecioUnidad"/>
+                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Incluir IVA
+													</label>
+                      <div class="col-md-2 col-sm-5 col-xs-12 no-padding-right" style="text-align: left; padding-top: 5px;">
+                        <div class="icheckbox_flat-green {{facturaCtrl.detalleFactura.ivaCheckbox}}" ng-click="facturaCtrl.toggleIVA()" style="text-align: left;">
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-sm-4 col-xs-12 no-padding-right"  ng-show="facturaCtrl.detalleFactura.ivaCheckbox" style="text-align: left; padding-top: 5px;">
+                        <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.parameterIva"
+                          placeholder="incluir_iva."  />
+                        <span class="fa fa-percent form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+
+
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Descripción <span class="required">*</span>
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right" style="text-align: left;">
+                        <textarea required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20"
+                          data-parsley-maxlength="100" data-parsley-maxlength-message="Only 100 Characters" data-parsley-validation-threshold="10"
+                          style="margin-top: 0px; margin-bottom: 0px; height: 154px;" ng-model="facturaCtrl.detalleFactura.descripcion"></textarea>
+                      </div>
+                    </div>
+
+                    <br>
+                    <div class="textCenter">
+                      <button type="button"  class="btn btn-success" aria-hidden="true" style="margin-right: 0px" ng-click="facturaCtrl.anadir()">Agregar</button>
+                    </div>
+                  </div>
+
+                  <div id="objetoDatos2" ng-show="facturaCtrl.facturaDatos.editarElemento">
+
+
+                    <div class="item form-group" data-parsley-validate>
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Cantidad <span class="required">*</span>
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                        <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.detalleFactura2.cantidad"
+                          placeholder="Cant." required="required" />
+                        <span class="fa fa-plus form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="item form-group" data-parsley-validate>
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Precio unidad <span class="required">*</span>
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                        <input type="text" class=" form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.detalleFactura2.precioUnidad" ui-number-mask="2"
+                          placeholder="Precio unid." required="required" id="detalleFactura2PrecioUnidad"/>
+                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Incluir IVA
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right" style="text-align: left; padding-top: 5px;">
+                        <div class="icheckbox_flat-green {{facturaCtrl.detalleFactura2.ivaCheckbox}}" ng-click="facturaCtrl.toggleIVA()" style="text-align: left;">
+                        </div>
+                      </div>
+
+                      <div class="col-md-3 col-sm-4 col-xs-12 no-padding-right"  ng-show="facturaCtrl.detalleFactura2.ivaCheckbox" style="text-align: left; padding-top: 5px;">
+                        <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.parameterIva"
+                          placeholder="incluir_iva."  />
+                        <span class="fa fa-percent form-control-feedback left" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="item form-group">
+                      <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Descripción
+													</label>
+                      <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right" style="text-align: left;">
+                        <textarea required="" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100"
+                          data-parsley-maxlength-message="Only 100 Characters" data-parsley-validation-threshold="10" style="margin-top: 0px; margin-bottom: 0px; height: 154px;"
+                          ng-model="facturaCtrl.detalleFactura2.descripcion"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="textCenter">
+                      <button  class="btn btn-success" aria-hidden="true" ng-click="facturaCtrl.editarItem()">Editar</button>
+                      <button  class="btn btn-primary" aria-hidden="true" ng-click="facturaCtrl.cancelarEditarItem()">Cancelar</button>
+                    </div>
+
+                  </div>
+
+                </form>
+
+                <br>
+                <br>
+
+                <div class="item form-group" ng-show="facturaCtrl.items.length > 0">
+                  <div id="tableContainer" class="col-md-8 col-sm-8 col-sm-offset-2 col-md-offset-2 col-xs-12">
+                    <table id="datatable-responsive" class="table table-striped jambo_table bulk_action" cellspacing="0" width="100%" role="grid"
+                      aria-describedby="datatable-responsive_info" style="width: 100%;">
+                      <thead>
+                        <th>Descripción</th>
+                        <th class="textCenter">Cantidad</th>
+                        <th class="textCenter">Precio und.</th>
+                        <th class="textCenter">Subtotal elem.</th>
+                        <th class="textCenter">IVA</td>
+                          <th class="textCenter">Total elem.</th>
+                          <th class="textCenter">Acciones</th>
+                      </thead>
+                      <tr ng-repeat="item in facturaCtrl.items">
+                        <td class="textCenter">{{item.descripcion.substr(0,16)}}</td>
+                        <td class="textCenter">{{item.cantidad}}</td>
+                        <td class="textCenter">{{item.precioUnidad}}</td>
+                        <td class="textCenter">{{item.cantidad*item.precioUnidad}}</td>
+                        <td class="textCenter">{{item.iva}}</td>
+                        <td class="textCenter">{{item.totalItem}}</td>
+                        <td class="textCenter">
+                          <a style="margin-right: 10px" data-toggle="modal" data-target=".verFacturaModal2" ng-click="facturaCtrl.verItem(item)">
+														<i class="fa fa-search"></i>
+													  </a>
+                          <a style="margin-right: 10px" ng-click="facturaCtrl.editar(item)">
+														<i class="fa fa-pencil"></i>
+													  </a>
+                          <a style="margin-right: 10px" ng-click="facturaCtrl.eliminarItem(item)">
+														<i class="fa fa-trash-o"></i>
+													  </a>
+                        </td>
+                      </tr>
+                      </table>
+                      </br>
+                      <table class="table table-striped jambo_table bulk_action" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+                      <tr class="textCenter">
+                        <td><b>Subtotal</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{{facturaCtrl.detalleFactura.subtotal}}</b></td>
+                        <td></td>
+                      </tr>
+                      <tr class="textCenter">
+                        <td><b>IVA 12%</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{{facturaCtrl.detalleFactura.ivaTotal}}</b></td>
+                        <td></td>
+                      </tr>
+                      <tr class="textCenter">
+                        <td><b>Total</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{{facturaCtrl.detalleFactura.total}}</b></td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center">
+            </br>
+            <button class="btn btn-primary" ng-click="facturaCtrl.wizardPrevious()" ng-show="facturaCtrl.wizardButtons.anterior">Anterior</button>
+            <button class="btn btn-primary" ng-click="facturaCtrl.wizardNext()" ng-show="facturaCtrl.wizardButtons.siguiente">Siguiente</button>
+            <button class="btn btn-success" ng-click="facturaCtrl.wizardFinish()" ng-show="facturaCtrl.wizardButtons.finalizar">Finalizar</button>
+            <button id="cancel" class="btn btn-default" ng-click="facturaCtrl.wizardCancel()">Cancelar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ********************************************************************************************************
+ *************************************************************************************************************
+ **                                                VER FACTURA                                              **
+ *************************************************************************************************************
+ ********************************************************************************************************* -->
+
+  <div class="modal fade verFacturaModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header paddingLeft30">
+          <h4 class="modal-title" id="myModalLabel">Datos de la factura</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_content">
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="column-title" style="text-align: center;" colspan="2">Datos del {{facturaCtrl.facturaModalVer.para}}</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr class="even pointer">
+                      <td class="textRight" style="width: 50%"><b>Identificación</b></td>
+                      <td class="">{{facturaCtrl.facturaModalVer.descripcion}}</td>
+                    </tr>
+                    <tr class="odd pointer">
+                      <td class="textRight"><b>Teléfono</b></td>
+                      <td class="">{{facturaCtrl.facturaModalVer.telefono ? facturaCtrl.facturaModalVer.telefono : 'N/A'}}</td>
+                    </tr>
+                    <tr class="even pointer">
+                      <td class="textRight"><b>Dirección</b></td>
+                      <td class="">{{facturaCtrl.facturaModalVer.direccion != "null" ? facturaCtrl.facturaModalVer.direccion : 'N/A'}}</td>
+                    </tr>
+                    <tr class="odd pointer">
+                      <td class="textRight"><b>Correo</b></td>
+                      <td class=" ">{{facturaCtrl.facturaModalVer.correo ? facturaCtrl.facturaModalVer.correo : 'N/A'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </br>
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="column-title textCenter" colspan="6">Elementos de la factura</th>
+                    </tr>
+                    <tr class="headings">
+                      <th class="column-title textCenter">Descripción</th>
+                      <th class="column-title textCenter">Cantidad</th>
+                      <th class="column-title textCenter">Precio und.</th>
+                      <th class="column-title textCenter">Subtotal elem.</th>
+                      <th class="column-title textCenter">IVA</td>
+                        <th class="column-title textCenter">Total elem.</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in facturaCtrl.facturaModalVer.detallesFactura">
+                      <td class="textCenter">{{item.descripcion}}</td>
+                      <td class="textCenter">{{item.cantidad}}</td>
+                      <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.precioUnidad)}}</td>
+                      <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.cantidad*item.precioUnidad)}}</td>
+                      <td class="textCenter">{{item.precioUnidad*.12}}</td>
+                      <td class="textCenter"> {{item.precioUnidad+(item.precioUnidad*.12)}}</td>
+                    </tr>
+                    <tr class="textCenter">
+                      <td><b>Subtotal</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.facturaModalVer.subtotal)}}</b></td>
+                    </tr>
+                    <tr class="textCenter">
+                      <td><b>IVA 12%</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><b>{{facturaCtrl.facturaModalVer.iva}}</b></td>
+                    </tr>
+                    <tr class="textCenter">
+                      <td><b>Total</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.facturaModalVer.total)}}</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer textCenter">
+          <button  class="btn btn-default" data-dismiss="modal" ng-click="facturaCtrl.cerrarVer()">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                IMPRIMIR FACTURA                                         **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div class="modal fade imprimirFacturaModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header text-center">
+          <h4 class="modal-title">¡Advertencia!</h4>
+        </div>
+
+        <div class="modal-body">
+          <h5 class="text-center">¿Está seguro que desea imprimir "<b>{{facturaCtrl.facturaModalImprimir.numeroFactura}}</b>"?</h5>
+          </br>
+          <div class="row text-center">
+            <button  class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="facturaCtrl.imprimirModal('aceptar')">Aceptar</button>
+            <button  class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="facturaCtrl.imprimirModal('cancelar')">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                ELIMINAR FACTURA                                          **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div class="modal fade eliminarFacturaModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header text-center">
+          <h4 class="modal-title" id="myModalLabel">¡Advertencia!</h4>
+        </div>
+
+        <div class="modal-body">
+          <h5 class="text-center">¿Está seguro que desea eliminar "<b>{{facturaCtrl.tableItems.numeroFactura}}</b>"?</h5>
+          </br>
+          <div class="row text-center">
+            <button  class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="facturaCtrl.eliminarModal('aceptar')">Aceptar</button>
+            <button  class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="facturaCtrl.eliminarModal('cancelar')">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                CONSULTAR FACTURA                                          **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <!-- ********************************************************************************************************
+  *************************************************************************************************************
+  **                                                NOTAS                                                    **
+  *************************************************************************************************************
+  ********************************************************************************************************* -->
+
+  <div class="animateFade" ng-show="facturaCtrl.views.notas">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel animateFade">
+        <div class="x_title">
+          <h2>Agregar nota de crédito/débito <small>Proceso de registro de una nueva nota de crédito/débito</small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+          <table class="table table-striped jambo_table bulk_action">
+            <thead>
+              <tr class="headings">
+                <th class="column-title" style="text-align: center;" colspan="2">Datos de la factura</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="odd pointer">
+                <td class="textRight col-md-5"><b>Número de factura</b></td>
+                <td class="col-md-6">{{facturaCtrl.facturaNotas.numeroFactura ? facturaCtrl.facturaNotas.numeroFactura : 'N/A'}}</td>
+              </tr>
+              <tr class="odd pointer">
+                <td class="textRight"><b>Cliente</b></td>
+                <td>{{facturaCtrl.facturaNotas.descripcion ? facturaCtrl.facturaNotas.descripcion : 'N/A'}}</td>
+              </tr>
+              <tr class="even pointer">
+                <td class="textRight"><b>Identificación</b></td>
+                <td>{{facturaCtrl.facturaNotas.nuCedulaRif ? facturaCtrl.facturaNotas.nuCedulaRif : 'N/A'}}</td>
+              </tr>
+              <tr class="even pointer">
+                <td class="textRight"><b>Dirección</b></td>
+                <td>{{facturaCtrl.facturaNotas.direccion!='null' ? facturaCtrl.facturaNotas.direccion : 'N/A'}}</td>
+              </tr>
+              <tr class="even pointer">
+                <td class="textRight"><b>Fecha de emisión</b></td>
+                <td>{{facturaCtrl.facturaNotas.fechaEmision ? facturaCtrl.facturaNotas.fechaEmision : 'N/A'}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+          <form id="anadirNota2" class="form-horizontal form-label-left">
+
+            <div class="item form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Incluir IVA
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right" style="text-align: left; padding-top: 5px;">
+                <div class="icheckbox_flat-green {{facturaCtrl.notaIVA ? 'checked' : ''}}" ng-click="facturaCtrl.toggleNotaIVA()" style="text-align: left;">
+                </div>
+              </div>
+
+              <div class="col-md-3 col-sm-4 col-xs-12 no-padding-right"  ng-show="facturaCtrl.notaIVA" style="text-align: left; padding-top: 5px;">
+                <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.parameterIva"
+                  placeholder="incluir_iva."  />
+                <span class="fa fa-percent form-control-feedback left" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12">Tipo de nota <span class="required">*</span></label>
+              <div class="col-md-5 col-sm-5 col-xs-12">
+                <label class="custom_form_p"> Débito: </label>
+                <div class="{{facturaCtrl.radioNota.debito}}" ng-click="facturaCtrl.radioNotaSwitch('Debito')" style="position: relative;">
+                  <input type="radio" class="flat" name="tipoNota" ng-model="$parent.model" style="position: absolute; opacity: 0; cursor: pointer;"></input>
+                </div>
+                <label class="custom_form_p"> Crédito: </label>
+                <div class="{{facturaCtrl.radioNota.credito}}" ng-click="facturaCtrl.radioNotaSwitch('Credito')" style="position: relative;">
+                  <input type="radio" class="flat" name="tipoNota" ng-model="$parent.model" style="position: absolute; opacity: 0; cursor: pointer;"></input>
+                </div>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Fecha de emisión <span class="required">*</span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" >
+                  <div class="no-margin-bottom">
+                    <input type="text" id="formularioNotaFecha" name="date" class="form-control has-feedback-left" data-ng-model="facturaCtrl.datosNota.fechaEmision"
+                      required="required" placeholder="Fecha" readonly="readonly">
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                  </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <datetimepicker data-ng-model="facturaCtrl.datosNota.fechaEmision" data-on-set-time=""  data-before-render="facturaCtrl.setBeforeDate($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown', startView:'day', minView:'day', modelType: 'DD-MM-YYYY' }"></datetimepicker>
+                </ul>
+              </div>
+            </div>
+
+            <div class="item form-group" style="text-align: right;">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Observaciones <span class="required"></span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                <textarea id="message" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="100" data-parsley-validation-threshold="10"
+                  style="margin-top: 0px; margin-bottom: 0px; height: 96px;" ng-model="facturaCtrl.datosNota.observaciones"
+                  maxlength="100" placeholder="Observaciones"></textarea>
+              </div>
+            </div>
+
+            <div class="item form-group">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Estatus <span class="required">*</span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 required no-padding-right" data-validate-length-range="3" type="text">
+                <select class="form-control" ng-model="facturaCtrl.datosNota.estatus" required="required">
+                    <option value="">Seleccione..</option>
+                    <option value="1">Pagada</option>
+                    <option value="2">Pendiente</option>
+                    <option value="3">Anulada</option>
+                  </select>
+              </div>
+            </div>
+
+            <hr/>
+          </form>
+
+          <form id="anadirNota" class="form-horizontal form-label-left">
+            <div class="item form-group" style="text-align: right;">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" >Cantidad <span>*</span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                <input type="number" class="form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.datosNota.cantidad"
+                  placeholder="Cantidad" required="required" id="inputSuccess3" maxlength="32" />
+                <span class="fa fa-quote-left form-control-feedback left" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="item form-group" style="text-align: right;">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Precio unidad <span class="required">*</span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                <input type="text" class=" form-control has-feedback-left col-md-7 col-xs-12" ng-model="facturaCtrl.datosNota.precioUnidad" ui-number-mask="2"
+                  placeholder="Precio unidad" required="required" id="datosNotaPrecioUnidad" maxlength="32" />
+                <span class="fa fa-quote-left form-control-feedback left" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="item form-group" style="text-align: right;">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name">Descripción <span class="required">*</span>
+                </label>
+              <div class="col-md-5 col-sm-5 col-xs-12 no-padding-right">
+                <textarea id="message2" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="100"
+                  data-parsley-validation-threshold="10" style="margin-top: 0px; margin-bottom: 0px; height: 96px;" ng-model="facturaCtrl.datosNota.descripcion"
+                  maxlength="100" placeholder="Descripción"></textarea>
+              </div>
+            </div>
+
+            <br>
+          </form>
+
+            <div class="item form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <button  class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="facturaCtrl.anadirNota()">Agregar</button>
+                <button  ng-hide="facturaCtrl.notaTabla.length > 0" class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="facturaCtrl.cancelarAnadirNota()">Cancelar</button>
+              </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <div class="item form-group" ng-show="facturaCtrl.notaTabla.length > 0">
+              <div id="tableContainer" class="col-md-12 col-sm-12 col-xs-12">
+                <table id="datatable-responsive" class="table table-striped jambo_table bulk_action" cellspacing="0" width="100%" role="grid"
+                  aria-describedby="datatable-responsive_info" style="width: 100%;">
+                  <thead>
+                    <th class="textCenter">Descripción</th>
+                    <th class="textCenter">Cantidad</th>
+                    <th class="textCenter">Precio und.</th>
+                    <th class="textCenter">Subtotal elem.</th>
+                    <th class="textCenter">IVA</td>
+                      <th class="textCenter">Total elem.</th>
+                      <th class="textCenter">Acciones</th>
+                  </thead>
+                  <tr ng-repeat="item in facturaCtrl.notaTabla">
+                    <td class="textCenter">{{item.descripcion.substr(0,16)}}</td>
+                    <td class="textCenter">{{item.cantidad}}</td>
+                    <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.precioUnidad)}}</td>
+                    <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.cantidad*item.precioUnidad)}}</td>
+                    <td class="textCenter">{{item.iva}}</td>
+                    <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.total)}}</td>
+                    <td class="textCenter">
+                      <!-- <a style="margin-right: 10px" data-toggle="modal" data-target=".verFacturaModal2" ng-click="facturaCtrl.verItem(item)">
+                        <i class="fa fa-search"></i>
+                        </a> -->
+                      <a class="cursor-pointer" style="margin-right: 10px" ng-click="facturaCtrl.notaEditar(item)">
+                        <i class="fa fa-pencil"></i>
+                        </a>
+                      <a class="cursor-pointer" style="margin-right: 10px" ng-click="facturaCtrl.notaEliminar(item)">
+                        <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                  </tr>
+                </table>
+                </br>
+
+                <table class="table table-striped jambo_table bulk_action" cellspacing="0" width="100%" role="grid"
+                  aria-describedby="datatable-responsive_info" style="width: 100%;">
+                  <tr class="textCenter">
+                    <td><b>Subtotal</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.datosNota.subtotal)}}</b></td>
+                    <td></td>
+                  </tr>
+                  <tr class="textCenter">
+                    <td><b>IVA 12%</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.datosNota.iva}}</b></td>
+                    <td></td>
+                  </tr>
+                  <tr class="textCenter">
+                    <td><b>Total</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.datosNota.total)}}</b></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="item form-group" ng-show="facturaCtrl.notaTabla.length > 0">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                <button class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="facturaCtrl.guardarNota()">Guardar</button>
+                <button class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="facturaCtrl.cancelarNotas()">Cancelar</button>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="consultarFactura" class="row animateFade" ng-show="facturaCtrl.views.consultarFactura">
+
+    <!-- ********************************************************************************************************
+    *************************************************************************************************************
+    **                                                NOTAS                                                    **
+    *************************************************************************************************************
+    ********************************************************************************************************* -->
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Consultar factura <small>Proceso para consultar facturas previamente agregadas.</small></h2>
+          <!-- <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a >Settings 1</a>
+                </li>
+                <li><a >Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul> -->
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <table id="tablaConsultarFacturas" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Número de factura</th>
+                <th>Identificación</th>
+                <th>Cliente</th>
+                <th>Fecha de emisión</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <!-- <tbody>
+              <tr ng-repeat="tablaItem in facturaCtrl.tableItems">
+                <td>{{tablaItem.numeroFactura}}</td>
+                <td>{{tablaItem.identificacion}}</td>
+                <td>{{tablaItem.cliente}}</td>
+                <td>{{tablaItem.fecha}}</td>
+                <td style="text-align: center;">
+                  <a style="margin-right: 10px" data-toggle="modal" ng-click="facturaCtrl.ver()">
+                    <i class="fa fa-search"></i>
+                  </a>
+                  <a style="margin-right: 10px" data-toggle="modal" ng-click="facturaCtrl.eliminar()">
+                 	  <i class="fa fa-trash-o"></i>
+                  </a>
+                  <a style="margin-right: 10px" ng-click="facturaCtrl.ventanaNotas(tablaItem)">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody> -->
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+*************************************************************************************************************
+**                                                VER NOTA DEBITO                                              **
+*************************************************************************************************************
+********************************************************************************************************* -->
+
+  <div class="modal fade verNotaDebitoModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header paddingLeft30">
+          <button  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+         </button>
+          <h4 class="modal-title" id="myModalLabel">Datos de la nota de débito</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_content">
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="column-title" style="text-align: center;" colspan="2">Datos</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr class="even pointer">
+                      <td class="textRight"><b>Descripción</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaDebito.verDescripcion ? facturaCtrl.datosNotaDebito.verDescripcion : 'N/A'}}</td>
+                    </tr>
+                    <tr class="odd pointer">
+                      <td class="textRight"><b>Cantidad</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaDebito.verCantidad ? facturaCtrl.datosNotaDebito.verCantidad : 'N/A'}}</td>
+                    </tr>
+                    <tr class="even pointer">
+                      <td class="textRight"><b>Observaciones</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaDebito.verObservaciones ? facturaCtrl.datosNotaDebito.verObservaciones : 'N/A'}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer textCenter">
+          <button  class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ********************************************************************************************************
+ *************************************************************************************************************
+ **                                                VER NOTA CREDITO                                         **
+ *************************************************************************************************************
+ ********************************************************************************************************* -->
+
+  <div class="modal fade verNotaCreditoModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header paddingLeft30">
+          <button  class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Datos de la nota de crédito</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_content">
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="column-title" style="text-align: center;" colspan="2">Datos</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr class="even pointer">
+                      <td class="textRight"><b>Descripción</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaCredito.verDescripcion ? facturaCtrl.datosNotaCredito.verDescripcion : 'N/A'}}</td>
+                    </tr>
+                    <tr class="odd pointer">
+                      <td class="textRight"><b>Cantidad</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaCredito.verCantidad ? facturaCtrl.datosNotaCredito.verCantidad : 'N/A'}}</td>
+                    </tr>
+                    <tr class="even pointer">
+                      <td class="textRight"><b>Observaciones</b></td>
+                      <td class=" ">{{facturaCtrl.datosNotaCredito.verObservaciones ? facturaCtrl.datosNotaCredito.verObservaciones : 'N/A'}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer textCenter">
+          <button  class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="consultarFacturaNotas" class="row animateFade" ng-show="facturaCtrl.views.consultarNotas">
+
+    <!-- ********************************************************************************************************
+    *************************************************************************************************************
+    **                                                NOTAS                                                    **
+    *************************************************************************************************************
+    ********************************************************************************************************* -->
+
+    <div class="modal fade verNotaModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header paddingLeft30">
+            <h4 id="myModalLabel" class="modal-title">Datos de la Nota</h4>
+          </div>
+
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                  <th class="column-title" colspan="2" style="text-align: center;">Datos de la nota</th>
+                </thead>
+
+                <tbody>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Número de factura</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.numeroFactura ? facturaCtrl.facturaDatosNotasModal.numeroFactura : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Número de control</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.numeroControl ? facturaCtrl.facturaDatosNotasModal.numeroControl : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Tipo de nota</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.tipoNota ? facturaCtrl.facturaDatosNotasModal.tipoNota : 'N/A'}}</td>
+                  </tr>
+                  <tr class="even pointer">
+                    <td class="textRight" style="width: 50%;"><b>Cliente</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.descripcion ? facturaCtrl.facturaDatosNotasModal.descripcion : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>RIF</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.cedulaRif ? facturaCtrl.facturaDatosNotasModal.cedulaRif : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Dirección</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.direccion != 'null'? facturaCtrl.facturaDatosNotasModal.direccion : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Fecha de emisión</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.fecha ? facturaCtrl.facturaDatosNotasModal.fecha : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Excento de IVA</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.excentoIva ? facturaCtrl.facturaDatosNotasModal.excentoIva : 'N/A'}}</td>
+                  </tr>
+                  <tr class="odd pointer">
+                    <td class="textRight"><b>Estatus</b></td>
+                    <td class=" ">{{facturaCtrl.facturaDatosNotasModal.estatus ? facturaCtrl.facturaDatosNotasModal.estatus : 'N/A'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                  <th class="column-title" colspan="6" style="text-align: center;">Detalles de la nota</th>
+                </thead>
+                <thead>
+                  <th class="textCenter">Descripción</th>
+                  <th class="textCenter">Cantidad</th>
+                  <th class="textCenter">Precio und.</th>
+                  <th class="textCenter">Subtotal elem.</th>
+                  <th class="textCenter">IVA</td>
+                    <th class="textCenter">Total elem.</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in facturaCtrl.facturaDatosNotasModal.detalles">
+                    <td class="textCenter">{{item.descripcion.substr(0,16)}}</td>
+                    <td class="textCenter">{{item.cantidad}}</td>
+                    <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.precioUnidad)}}</td>
+                    <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.cantidad*item.precioUnidad)}}</td>
+                    <td class="textCenter">{{item.iva}}</td>
+                    <td class="textCenter"> {{(item.cantidad*item.precioUnidad) + item.iva}}</td>
+                  </tr>
+                  <tr class="textCenter">
+                    <td><b>Subtotal</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.facturaDatosNotasModal.subTotal)}}</b></td>
+                  </tr>
+                  <tr class="textCenter">
+                    <td><b>IVA 12%</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.facturaDatosNotasModal.iva}}</b></td>
+                  </tr>
+                  <tr class="textCenter">
+                    <td><b>Total</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{facturaCtrl.setCurrencyModal(facturaCtrl.facturaDatosNotasModal.total)}}</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer textCenter">
+            <button  class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Consultar notas de débito/crédito <small>Proceso para consultar las notas de débito/crédito de una factura.</small></h2>
+         <!--  <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+              <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a >Settings 1</a>
+                </li>
+                <li><a >Settings 2</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul> -->
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <table id="tablaConsultarNotas" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="textCenter">Número de control</th>
+                <th class="textCenter">Número de factura</th>
+                <th class="textCenter">Cliente</th>
+                <th class="textCenter">Tipo</th>
+                <th class="textCenter">Estatus</th>
+                <th class="textCenter">Total</th>
+                <th class="textCenter">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in facturaCtrl.facturaDatosNotas">
+                <td class="textCenter">{{item.numeroControl}}</td>
+                <td class="textCenter">{{item.numeroFactura}}</td>
+                <td class="textCenter">{{item.descripcion}}</td>
+                <td class="textCenter">{{item.tipoNota}}</td>
+                <td class="textCenter">{{item.estatus}}</td>
+                <td class="textCenter"> {{facturaCtrl.setCurrencyModal(item.total)}}</td>
+                <td style="text-align: center;">
+                  <a class="cursor-pointer" data-toggle="modal" ng-click="facturaCtrl.verNota(item)">
+                    <i class="fa fa-search"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+            <button  class="btn btn-primary col-sm-4 col-md-4 col-xs-4 col-sm-offset-4 col-md-offset-4 col-xs-offset-4"
+              ng-click="facturaCtrl.viewsController('consultarFactura')">Cancelar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- <div class="item form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nacionalidad <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12 required" data-validate-length-range="3" required="required" type="text">
+            <select class="form-control" ng-options="nacionalidad.nombre as nacionalidad.nombre for nacionalidad in bancoCtrl.nacionalidades" ng-model="bancoCtrl.editarBanco.nacionalidad">
+              <option value="">Seleccione..</option>
+
+            </select>
+          </div>
+        </div> -->

@@ -1,0 +1,405 @@
+<div class="right_col" role="main" ng-controller="cotizacionesController as cotizacionesCtrl">
+
+	<div class="activarCotizacionAceptadaModal" ng-click="cotizacionesCtrl.verCotizacionAceptada()"></div>
+	<div class="activarCotizaciones" ng-click="cotizacionesCtrl.activar()"></div>
+	<div class="activarEditarCotizaciones" ng-click="cotizacionesCtrl.editarCotizacionesFn()"></div>
+
+	<div class="modal fade verCotizacionAceptadaModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header paddingLeft30">
+			<!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+			</button> -->
+			<h4 class="modal-title" id="myModalLabel">Datos de la cotización</h4>
+			</div>
+			<div class="modal-body">
+			<div class="table-responsive">
+				<table class="table table-striped jambo_table bulk_action">
+				<thead>
+					<tr class="headings">
+					<th class="column-title" style="text-align: center;" colspan="2">Descripción de la cotización</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Nombre</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.nombre}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Cédula</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.cedula}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Correo electrónico</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.correo}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Tipo cobertura</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.tipoCobertura}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Marca</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.marca}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Modelo</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.modelo}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Placa</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.placa}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Aseguradora</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.aseguradora}}</td>
+					</tr>
+					
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Prima total</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.primaTotal}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Suma asegurada (Casco)</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.sumaAseguradaCasco}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Suma asegurada (Pérdida total)</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.sumaAseguradaPerdidaTotal}}</td>
+					</tr>
+					<tr class="odd pointer">
+						<td class="textRight col-md-5"><b>Tasa</b></td>
+						<td class="col-md-6">{{cotizacionesCtrl.cotizacionAceptada.tasa}}</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>
+
+			<div class="modal-footer textCenter">
+			<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cotizacionesCtrl.eliminarModal()">Cerrar</button>
+			</div>
+
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                                CARGA MASIVA DE ASEGURADOS                               **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+	<div class="animateFade" ng-show="cotizacionesCtrl.views.cargarAsegurados">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Cargar asegurados <small>Proceso de carga masiva de asegurados</small></h2>
+				<!-- <ul class="nav navbar-right custom_panel_toolbox">
+					<li><a class="cotizaciones collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul> -->
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="row">
+					<div ng-show="cotizacionesCtrl.aseguradosViews.cargar" class="animateFade col-sm-6 col-md-6 col-xs-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 col-lg-offset-3 text-center loadFileBox">
+						<!--<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>-->
+						<label class="warning-text marginTop20">El archivo debe poseer el formato <b>X-XXXXXXXXX_NOMBREARCHIVO.xls ó .xlxs</b></label>
+						<label class="warning-text">Ejemplo: <b>J-123456789_ASEGURADOS.xlxs</b></label><br>
+						<label class="loadFileText marginTop20">{{cotizacionesCtrl.archivoAsegurados ? cotizacionesCtrl.archivoAsegurados.name : "Seleccione el archivo.." }}</label>
+						</br>
+						<label class="btn btn-default btn-file marginBottom20">
+							<i class="fa fa-upload"></i><input id="archivoAsegurados" type="file" file-model="cotizacionesCtrl.archivoAsegurados" style="display: none;">
+						</label>
+						</br>
+						<!--<input type = "file" file-model = "cotizacionesCtrl.archivoExcelUno"/>-->
+						<div ng-show="cotizacionesCtrl.archivoAsegurados" class="animateFade marginBottom20 col-sm-12 col-md-12 col-lg-12 col-xs-12">
+							<button class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="cotizacionesCtrl.cargarAseguradosService(cotizacionesCtrl.archivoAsegurados)">
+								Cargar
+							</button>
+							<button class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="cotizacionesCtrl.cancelFile('Asegurados')">
+								Cancelar
+							</button>
+						</div>
+					</div>
+
+					<div ng-show="cotizacionesCtrl.aseguradosViews.exito" class="animateFade col-sm-6 col-md-6 col-xs-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 col-lg-offset-3 text-center loadFileBox">
+						<!--<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>-->
+						<label class="loadFileText marginTop20 marginBottom20">{{cotizacionesCtrl.mensajeAseguradoService}}</label>
+						</br>
+						<!--<input type = "file" file-model = "cotizacionesCtrl.archivoExcelUno"/>-->
+						<div ng-show="cotizacionesCtrl.archivoAsegurados" class="marginBottom20 col-sm-12 col-md-12 col-lg-12 col-xs-12">
+							<button class="btn btn-success col-sm-4 col-md-4 col-xs-4 col-sm-offset-4 col-md-offset-4 col-xs-offset-4" ng-click="cotizacionesCtrl.aseguradosViewsController('cargar')">
+								Aceptar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                                CARGA MASIVA DE COTIZACIONES                             **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+
+	<div class="animateFade" ng-show="cotizacionesCtrl.views.cargarCotizaciones">
+		<div class="page-title">
+			</br>
+		</div>
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Cargar cotizaciones <small>Proceso de carga masiva de cotizaciones</small></h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="row">
+					<div ng-show="cotizacionesCtrl.cotizacionesViews.cargar" class="animateFade col-sm-6 col-md-6 col-xs-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 col-lg-offset-3 text-center loadFileBox">
+						<!--<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>-->
+						<label class="loadFileText marginTop20">{{cotizacionesCtrl.archivoCotizaciones ? cotizacionesCtrl.archivoCotizaciones.name : "Seleccione el archivo.." }}</label>
+						</br>
+						<label class="btn btn-default btn-file marginBottom20">
+							<i class="fa fa-upload"></i><input id="archivoCotizaciones" type="file" file-model="cotizacionesCtrl.archivoCotizaciones" style="display: none;">
+						</label>
+						</br>
+						<!--<input type = "file" file-model = "cotizacionesCtrl.archivoExcelUno"/>-->
+						<div ng-show="cotizacionesCtrl.archivoCotizaciones" class="animateFade marginBottom20 col-sm-12 col-md-12 col-lg-12 col-xs-12">
+							<button class="btn btn-success col-sm-3 col-sm-offset-3 col-md-3 col-md-offset-3 col-xs-3 col-xs-offset-3" ng-click="cotizacionesCtrl.cargarCotizacionesService(cotizacionesCtrl.archivoCotizaciones)">
+								Cargar
+							</button>
+							<button class="btn btn-primary col-sm-3 col-md-3 col-xs-3" ng-click="cotizacionesCtrl.cancelFile('Cotizaciones')">
+								Cancelar
+							</button>
+						</div>
+					</div>
+
+					<div ng-show="cotizacionesCtrl.cotizacionesViews.exito" class="animateFade col-sm-6 col-md-6 col-xs-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-xs-offset-3 col-lg-offset-3 text-center loadFileBox">
+						<!--<label class="loadFileText marginTop20 marginBottom20">{{cotizacionesCtrl.mensajeAseguradoService}}</label>
+						</br>-->
+						<div ng-show="cotizacionesCtrl.archivoCotizaciones" class="marginBottom20 col-sm-12 col-md-12 col-lg-12 col-xs-12">
+							<button class="btn btn-success col-sm-4 col-md-4 col-xs-4 col-sm-offset-4 col-md-offset-4 col-xs-offset-4" ng-click="cotizacionesCtrl.aseguradosViewsController('cargar')">
+								Aceptar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                                VER FINACIADORA                                            **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+	<div class="modal fade" id="verCotizacionModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Datos de la cotización</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Datos del asegurado</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight" style="width: 50%"><b>Nombre</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.nombre}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Cédula</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.cedula}}</td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Correo electrónico</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.correo}}</td>
+								</tr>
+							</tbody>
+
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="2">Vehículo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="even pointer">
+									<td class="textRight"><b>Marca</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.marca}} </td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Modelo</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.modelo}} </td>
+								</tr>
+								<tr class="even pointer">
+									<td class="textRight"><b>Año</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.anio | number : 0}} </td>
+								</tr>
+								<tr class="odd pointer">
+									<td class="textRight"><b>Placa</b></td>
+									<td class=" ">{{cotizacionesCtrl.cotizacionesModal.placa}} </td>
+								</tr>
+							</tbody>
+						</table>
+						<!--
+						<table id="tablaModalContactos" class="table table-striped jambo_table bulk_action" style="margin-bottom: 0px;">
+							<thead>
+								<tr class="headings">
+									<th class="column-title text-center" colspan="3">Cotizaciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="cotizacionesCtrl.cotizacionesModal.contactos.length == 0">
+									<td class="text-center">Esta cotizaciones no posee contactos registrados.</td>
+								</tr>
+								<tr class="even pointer" ng-repeat="contacto in cotizacionesCtrl.cotizacionesModal.contactos">
+									<td style="width: 25%; text-align: center;">{{contacto.nombreContacto}}</td>
+									<td style="width: 25%; text-align: center;">{{contacto.cargo}}</td>
+									<td style="width: 25%; text-align: center;">{{contacto.numeroTelefono}}</td>
+								</tr>
+							</tbody>
+						</table>-->
+					</div>
+				</div>
+				<div class="modal-footer textCenter">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                                ELIMINAR COTIZACION                                      **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+	<div class="modal fade eliminarFinanciModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+			<div class="modal-content modal-content-question">
+
+				<div class="modal-header modal-header-question">
+					<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+				</div>
+
+				<div class="modal-body">
+					<h5 class="text-center">¿Está seguro que desea eliminar la Cotizaciones {{cotizacionesCtrl.datos.nombre}}?</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="cotizacionesCtrl.eliminarModal('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="cotizacionesCtrl.eliminarModal('cancelar')">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                        ELIMINAR TODAS LAS COTIZACIONES                                  **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+	<div class="modal fade descartarCotizacionesModal modal-question" style="vertical-align: center;" tabindex="-1" role="dialog"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-question" style="vertical-align: center;">
+			<div class="modal-content modal-content-question">
+
+				<div class="modal-header modal-header-question">
+					<h4 class="modal-title" id="myModalLabel2">¡Advertencia!</h4>
+				</div>
+
+				<div class="modal-body">
+					<h5 class="text-center">¿Está seguro que desea descartar TODAS las cotizaciones?</b>?</h5>
+					</br>
+					<div class="row text-center">
+						<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="cotizacionesCtrl.descartarCotizaciones('aceptar')">Aceptar</button>
+						<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="cotizacionesCtrl.descartarCotizaciones('cancelar')">Cancelar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- ********************************************************************************************************
+	*************************************************************************************************************
+	**                                                LISTAR COTIZACIONES                                            **
+	*************************************************************************************************************
+	********************************************************************************************************* -->
+
+	<div class="animateFade" ng-show="cotizacionesCtrl.views.listarCotizaciones">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Consultar cotizaciones<small>Lista de cotizaciones</small></h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<table id="tablaConsultarCotizaciones" class="table table-striped table-bordered dt-responsive nowrap bulk_action" cellspacing="0"
+				 width="100%">
+					<thead>
+						<tr>
+							<th class="no-sort">
+								<div class="icheckbox_flat-green checkboxAll" style="text-align: left;">
+							</th>
+							<th>Nombre</th>
+							<th>Cédula</th>
+							<th>Marca</th>
+							<th>Tipo</th>
+							<th class="bold">Estatus</th>
+							<th>Acción</th>
+						</tr>
+					</thead>
+				</table>
+				</br>
+				<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 text-center">
+					<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="cotizacionesCtrl.enviarCotizaciones()">Cotizar</button>
+					<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="cotizacionesCtrl.descartarCotizacionesModal()">Descartar</button>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="animateFade" ng-show="cotizacionesCtrl.views.listarCotizacionesSeleccionadas">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Cotizaciones aceptadas<small>Lista de cotizaciones aceptadas por los asegurados</small></h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<table id="tablaCotizacionesAceptadas" class="table table-striped table-bordered dt-responsive nowrap bulk_action" cellspacing="0"
+					 width="100%">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Cédula</th>
+								<th>Marca</th>
+								<th>Tipo</th>
+								<th>Aseguradora</th>
+								<th>Acción</th>
+							</tr>
+						</thead>
+					</table>
+					</br>
+					<!-- <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 text-center">
+					<button type="button" class="btn btn-success col-md-2 col-md-offset-4" data-dismiss="modal" ng-click="cotizacionesCtrl.enviarCotizaciones()">Cotizar</button>
+					<button type="button" class="btn btn-primary col-md-2" data-dismiss="modal" ng-click="cotizacionesCtrl.descartarCotizacionesModal()">Descartar</button>
+				</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>	
