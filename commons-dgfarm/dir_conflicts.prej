@@ -1,0 +1,14 @@
+Trying to add new property 'svn:ignore'
+but the property already exists.
+<<<<<<< (local property value)
+.settings
+target
+=======
+.settings
+
+.project
+
+.classpath
+
+target
+>>>>>>> (incoming property value)
